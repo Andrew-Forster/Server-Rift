@@ -1,0 +1,187 @@
+
+<!DOCTYPE html>
+<!-- Andrew Forster
+  - Server Rift
+  - Sources:
+  +  
+  + 
+  
+  Better Comments Extension for VS Code
+  ! Important
+  * Highlight
+  ? Question
+  TODO: Todo
+
+  Potential Questions:
+  Will i be added to servers more than once?
+  What if i don't like the servers i'm added to?
+  What if i don't want to be added to servers anymore?
+  What if i want to change my preferences?
+
+  TODO:
+  - Add another font choice similar to current font. 
+  - Fix lag with mobile nav btn.
+
+-->
+<html lang="en" class="onload-animation" data-odelay="0">
+  <meta property="og:site_name" content="Server Rift"/>
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="The new way to find discord servers"/>
+  <meta property="og:description" content="Find servers easily & effortlessly."/>
+  <meta property="og:url" content="https://andrew-forster.github.io/"/>
+  <meta property="og:image" content="/Images/discordimg.png"/>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Server Rift</title>
+
+
+
+  <!-- JQUERY LINKING -->
+  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+  <!-- Favicon -->
+  <link rel="icon" type="/image/jpg" href="Images/logo.png">
+
+
+
+  <!--*----------------------------->
+  <!--* SCRIPTS & OTHER LIBRARIES -->
+  <!--*----------------------------->
+  <!-- Icons -->
+  <script src="https://kit.fontawesome.com/3116842acc.js" crossorigin="anonymous"></script>
+
+  <!-- Scroll Animations -->
+  <link rel="stylesheet" type="text/css" href="/CSS/Items/scrollanimator.css">
+  <script src="/JS/Items/scrollanimator.js"></script>
+
+
+  <!--*------------------------------------>
+  <!--* END OF SCRIPTS & OTHER LIBRARIES -->
+  <!--*------------------------------------>
+
+
+
+  <!--*------------------>
+  <!--* PAGE LINKING'S -->
+  <!--*------------------>
+
+  <!-- CSS -->
+  <link rel="stylesheet" type="text/css" href="/CSS/styles.css">
+  <link rel="stylesheet" type="text/css" href="/CSS/Pages/main.css">
+  <!-- JS -->
+  <script src="/JS/Pages/main.js" defer></script>
+  
+  
+  <!--*------------------------->
+  <!--* End of PAGE LINKING'S -->
+  <!--*------------------------->
+  
+  
+  <!-- Navbar -->
+  <div id="nav-placeholder"></div>
+  
+
+</head>
+
+<body>
+  <main>
+
+    <!-- Call To Action -->
+    <section class="headers">
+      <header class="htextSection">
+        <h1 class="main-text" id="main-text"></h1>
+        <button class="skipLoad" id="skipLoad">Skip Intro</button>
+
+        <h3 class="secondary-text onload_shift animation-delay6 onload-animation" id="text2">Find discord servers easily<br> and effortlessly every
+          week</h3>
+        <p class="stParagraph onload_shift animation-delay6-1 onload-animation" >Click the button below to get started or scroll down to preview how
+          the rift works!</p>
+        <a href="/HTML/Pages/getstarted.html"><button class="main-button onload_shift animation-delay6-2 onload-animation">Get Started</button></a>
+      </header>
+      <div class="mainImgContainer onload_shift animation-delay6-3 onload-animation" >
+        <img class="mainImg" src="/Images/discordimg.png" alt="Picture of finding a discord server" draggable="false">
+        <div class="imgSpotlight"></div>
+      </div>
+    </section>
+    
+    <!-- Steps Section -->
+    <section class="steps sa-duration1 sa-easeoutcubic">
+      <div class="step1 sa-group sa-freeze" data-sa-threshold="400">
+        <h2 class="sa sa-delay0_1">STEP 1</h2>
+      <div class="step-flex sa-group">
+        <h3 class="sa sa-delay0_2">Choose Your Interests</h3>
+        <p class="sa sa-delay0_4">Pick the type of servers you would like to be added to. Pick one or pick them all!
+        </p>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-list-check sa-group" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" class="tjmDxhmb_0 sa-custom"></path><path d="M3.5 5.5l1.5 1.5l2.5 -2.5" class="tjmDxhmb_1 sa-custom"></path><path d="M3.5 11.5l1.5 1.5l2.5 -2.5" class="tjmDxhmb_2 sa-custom"></path><path d="M3.5 17.5l1.5 1.5l2.5 -2.5" class="tjmDxhmb_3 sa-custom"></path><path d="M11 6l9 0" class="tjmDxhmb_4 sa-custom"></path><path d="M11 12l9 0" class="tjmDxhmb_5 sa-custom"></path><path d="M11 18l9 0" class="tjmDxhmb_6 sa-custom"></path><style data-made-with="vivus-instant">.tjmDxhmb_0{stroke-dasharray:96 98;stroke-dashoffset:97;}.tjmDxhmb_1{stroke-dasharray:6 8;stroke-dashoffset:7;}.tjmDxhmb_2{stroke-dasharray:6 8;stroke-dashoffset:7;}.tjmDxhmb_3{stroke-dasharray:6 8;stroke-dashoffset:7;}.tjmDxhmb_4{stroke-dasharray:9 11;stroke-dashoffset:10;}.tjmDxhmb_5{stroke-dasharray:9 11;stroke-dashoffset:10;}.tjmDxhmb_6{stroke-dasharray:9 11;stroke-dashoffset:10;}.tjmDxhmb_0.active{animation:tjmDxhmb_draw 1.5s ease-in-out 0ms forwards;}.tjmDxhmb_1.active{animation:tjmDxhmb_draw 1.5s ease-in-out 55ms forwards;}.tjmDxhmb_2.active{animation:tjmDxhmb_draw 1.5s ease-in-out 111ms forwards;}.tjmDxhmb_3.active{animation:tjmDxhmb_draw 1.5s ease-in-out 166ms forwards;}.tjmDxhmb_4.active{animation:tjmDxhmb_draw 1.5s ease-in-out 222ms forwards;}.tjmDxhmb_5.active{animation:tjmDxhmb_draw 1.5s ease-in-out 277ms forwards;}.tjmDxhmb_6.active{animation:tjmDxhmb_draw 1.5s ease-in-out 333ms forwards;}@keyframes tjmDxhmb_draw{100%{stroke-dashoffset:0;}}@keyframes tjmDxhmb_fade{0%{stroke-opacity:1;}92.3076923076923%{stroke-opacity:1;}100%{stroke-opacity:0;}}</style>
+        
+      </svg>
+    </div>
+    <div class="step2 sa-group sa-freeze" data-sa-threshold="400">
+      <h2 class="sa sa-delay0_1">STEP 2</h2>
+      <div class="step-flex sa-group">
+        <h3 class="sa sa-delay0_2">Adjust Rifting Preferences</h3>
+        <p class="sa sa-delay0_4">Choose your preferences on how often you'd like to be added to servers. </p>
+      </div>
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-adjustments-alt sa-group" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" fill="none" class="JQgmpHUB_0"></path><path d="M4 8h4v4h-4z" class="JQgmpHUB_1 sa-custom"></path><path d="M6 4l0 4" class="JQgmpHUB_2 sa-custom"></path><path d="M6 12l0 8" class="JQgmpHUB_3 sa-custom"></path><path d="M10 14h4v4h-4z" class="JQgmpHUB_4 sa-custom"></path><path d="M12 4l0 10" class="JQgmpHUB_5 sa-custom"></path><path d="M12 18l0 2" class="JQgmpHUB_6 sa-custom"></path><path d="M16 5h4v4h-4z" class="JQgmpHUB_7 sa-custom"></path><path d="M18 4l0 1" class="JQgmpHUB_8 sa-custom"></path><path d="M18 9l0 11" class="JQgmpHUB_9 sa-custom"></path><style data-made-with="vivus-instant">.JQgmpHUB_0{stroke-dasharray:96 98;stroke-dashoffset:97}.JQgmpHUB_1{stroke-dasharray:16 18;stroke-dashoffset:17}.JQgmpHUB_2{stroke-dasharray:4 6;stroke-dashoffset:5}.JQgmpHUB_3{stroke-dasharray:8 10;stroke-dashoffset:9}.JQgmpHUB_4{stroke-dasharray:16 18;stroke-dashoffset:17}.JQgmpHUB_5{stroke-dasharray:10 12;stroke-dashoffset:11}.JQgmpHUB_6{stroke-dasharray:2 4;stroke-dashoffset:3}.JQgmpHUB_7{stroke-dasharray:16 18;stroke-dashoffset:17}.JQgmpHUB_8{stroke-dasharray:1 3;stroke-dashoffset:2}.JQgmpHUB_9{stroke-dasharray:11 13;stroke-dashoffset:12}.JQgmpHUB_0.active{animation:JQgmpHUB_draw 1.5s ease-in-out 0s forwards}.JQgmpHUB_1.active{animation:JQgmpHUB_draw 1.5s ease-in-out 37ms forwards}.JQgmpHUB_2.active{animation:JQgmpHUB_draw 1.5s ease-in-out 74ms forwards}.JQgmpHUB_3.active{animation:JQgmpHUB_draw 1.5s ease-in-out 111ms forwards}.JQgmpHUB_4.active{animation:JQgmpHUB_draw 1.5s ease-in-out 148ms forwards}.JQgmpHUB_5.active{animation:JQgmpHUB_draw 1.5s ease-in-out 185ms forwards}.JQgmpHUB_6.active{animation:JQgmpHUB_draw 1.5s ease-in-out 222ms forwards}.JQgmpHUB_7.active{animation:JQgmpHUB_draw 1.5s ease-in-out 259ms forwards}.JQgmpHUB_8.active{animation:JQgmpHUB_draw 1.5s ease-in-out 296ms forwards}.JQgmpHUB_9.active{animation:JQgmpHUB_draw 1.5s ease-in-out 333ms forwards}@keyframes JQgmpHUB_draw{100%{stroke-dashoffset:0}}@keyframes JQgmpHUB_fade{0%{stroke-opacity:1}92.3076923076923%{stroke-opacity:1}100%{stroke-opacity:0}}</style>
+      </svg>
+    </div>
+    <div class="step3 sa-group sa-freeze" data-sa-threshold="400">
+      <h2 class="sa sa-delay0_1">STEP 3</h2>
+      <div class="step-flex sa-group">
+        <h3 class="sa sa-delay0_2">Login Via Discord</h3>
+        <p class="sa sa-delay0_4">Login via discord so our bot can add you to servers & so you can come back and edit
+          your preferences any time!</p>
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-login-2 sa-group" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" class="nxfhZcdE_0 sa-custom"></path><path d="M9 8v-2a2 2 0 0 1 2 -2h7a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-7a2 2 0 0 1 -2 -2v-2" class="nxfhZcdE_1 sa-custom"></path><path d="M3 12h13l-3 -3" class="nxfhZcdE_2 sa-custom"></path><path d="M13 15l3 -3" class="nxfhZcdE_3 sa-custom"></path><style data-made-with="vivus-instant">.nxfhZcdE_0{stroke-dasharray:96 98;stroke-dashoffset:97}.nxfhZcdE_1{stroke-dasharray:43 45;stroke-dashoffset:44}.nxfhZcdE_2{stroke-dasharray:18 20;stroke-dashoffset:19}.nxfhZcdE_3{stroke-dasharray:5 7;stroke-dashoffset:6}.nxfhZcdE_0.active{animation:nxfhZcdE_draw 1.5s ease-in-out 0s forwards}.nxfhZcdE_1.active{animation:nxfhZcdE_draw 1.5s ease-in-out 111ms forwards}.nxfhZcdE_2.active{animation:nxfhZcdE_draw 1.5s ease-in-out 222ms forwards}.nxfhZcdE_3.active{animation:nxfhZcdE_draw 1.5s ease-in-out 333ms forwards}@keyframes nxfhZcdE_draw{100%{stroke-dashoffset:0}}@keyframes nxfhZcdE_fade{0%{stroke-opacity:1}92.3076923076923%{stroke-opacity:1}100%{stroke-opacity:0}}</style>
+        </svg>
+    </div>
+
+
+
+
+  </section>
+  
+  <!-- Confirmation Banner -->
+  <section class="steps-end sa-duration1 sa-easeoutcubic">
+    <div class="steps-end-container sa-group sa-freeze" data-sa-threshold="450">
+      <h2 class="sa sa-delay0_1">That's it!</h2>
+      <p class="sa sa-delay0_2">Enjoy a random selection of servers every week! No strings attached</p>
+      <div class="btnRiftContainer sa sa-delay0_4"><a href="/HTML/Pages/getstarted.html"><button class="btnRift">Rift me</button></a></div>
+    </div>
+  </section>
+</main>
+  
+  <div id="footer-placeholder"></div>
+
+
+
+</body>
+
+</html>
+
+<!-- Navbar JS Code -->
+<script>
+  $(function () {
+    $("#nav-placeholder").load("/HTML/Items/navbar.html",
+    function () {
+      $(".main-nav li button:contains('Home')").addClass("active");
+    });
+  });
+</script>
+
+<!-- Footer JS Code -->
+<script>
+  $(function () {
+    $("#footer-placeholder").load("/HTML/Items/footer.html");
+  });
+</script>
+
+
+<!-- IMPORTANT BG ELEMENT -->
+<div class="bg"></div> 
+

@@ -1,0 +1,238 @@
+/* Variable Colors */
+:root {
+    /* HOVERS */
+    --nav-hover: linear-gradient(90deg, rgba(137, 188, 255, 0.9) 0%, rgba(44, 102, 227, 0.9) 100%); /* For Navigation on hover color */
+    --utility-hover: #aaaaaa; /* Used for hovering on anchor tags */
+    
+    /* Main */
+    --main-color: rgba(40, 109, 198, 0.803);
+    --main-shadow: rgba(255, 255, 255, 0.80); /* Used for card shadows */
+    --step1-color: linear-gradient(205deg, rgba(80, 80, 80, 0.05) 60%, rgba(56, 44, 227, 0.4) 100%); /* Card Color */
+    --step2-color: linear-gradient(205deg, rgba(80, 80, 80, 0.05) 60%, rgba(44,102,227,0.4) 100%); /* Card Color */
+    --step3-color: linear-gradient(205deg, rgba(80, 80, 80, 0.05) 60%, rgba(44, 181, 227, 0.4) 100%); /* Card Color */
+    --steps-end-color: #252e3f; /* Steps End Section */
+    --main-gradient: linear-gradient(108deg, rgba(4,44,96,1) 0%, rgba(13,28,61,1) 14%, rgba(13,20,46,1) 45%, rgba(13,13,33,1) 79%); /* Main BG color */
+    --page-gradient:  rgba(28, 28, 28, 0.75); /* Darkens mobile nav */
+    --footer-color: rgb(25, 32, 40); /* Footer color */
+
+    
+    --btn-color: #ffffff; /* For all button colors */
+    --second-btn-color: #1e385a; /* Secondary btn colors */
+    --font-color: #ffffff; /* For all font colors  */
+    --font-opposite: #000000; /* For all font colors  */
+    --discord: #7289DA; /* Discord color */
+    --settingsbg: #2F2C42; /* Settings Background */
+    --cardbg: rgb(25, 32, 40); /* Card Background */
+
+}
+
+
+
+@font-face {
+    font-family: Teko;
+    src: url(/Fonts/Teko/Teko-VariableFont_wght.ttf);
+}
+@font-face {
+    font-family: LTS;
+    src: url(/Fonts/LT\ Sonoma\ 2.otf);
+}
+
+html {
+  font-size: 62.5%;
+}
+
+.logo {
+    /* property: value */
+    font-family: LTS, Helvetica, sans-serif;
+    font-size: 4rem;
+    color: var(--font-color);
+    margin: 0 0 16px;
+    display: inline;
+    cursor: pointer;
+}
+
+h1 {
+    /* property: value */
+    color: var(--font-color);
+    font-family: Teko, Helvetica, sans-serif;
+    font-weight: bolder;
+    font-size: 7rem;
+    margin: 0 0 16px;
+    cursor: default;
+    -webkit-user-select: none;
+    user-select: none;
+
+
+}
+
+h2 {
+    /* property: value */
+    color: var(--font-color);
+    font-family: Teko, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 6.2rem;
+    margin: 0 0 8px;
+    cursor: default;
+    -webkit-user-select: none;
+    user-select: none;
+
+
+}
+
+h3 {
+    /* property: value */
+    color: var(--font-color);
+    font-family: Teko, Helvetica, sans-serif;
+    font-weight: normal;
+    font-size: 5.4rem;
+    margin: 0 0 8px;
+    cursor: default;
+    -webkit-user-select: none;
+    user-select: none;
+
+
+}
+
+h4 {
+    /* property: value */
+    color: var(--font-color);
+    font-family: Teko, Helvetica, sans-serif;
+    font-size: 4.6rem;
+    font-weight: normal;
+    margin: 0 0 8px;
+    cursor: default;
+    -webkit-user-select: none;
+    user-select: none;
+
+
+}
+
+h5 {
+    /* property: value */
+    color: var(--font-color);
+    font-family: Teko, Helvetica, sans-serif;
+    font-size: 3.8rem;
+    font-weight: normal;
+    margin: 0 0 8px;
+    cursor: default;
+    -webkit-user-select: none;
+    user-select: none;
+
+
+}
+
+h6 {
+    /* property: value */
+    color: var(--font-color);
+    font-family: Teko, Helvetica, sans-serif;
+    font-size: 3rem;
+    font-weight: normal;
+    margin: 0 0 8px;
+    cursor: default;
+    -webkit-user-select: none;
+    user-select: none;
+
+
+}
+
+li {
+    /* property: value */
+    color: var(--font-color);
+    font-family: Teko, Helvetica, sans-serif;
+    font-size: 3rem;
+    cursor: default;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+p {
+    /* property: value */
+    color: var(--font-color);
+    font-family: Teko, Helvetica, sans-serif;
+    font-size: 3rem;
+    margin: 24px 0 24px;
+    line-height: 4rem;
+    cursor: default;
+    -webkit-user-select: none;
+    user-select: none;
+    font-weight: 100;
+}
+
+div {
+    /* property: value */
+    color: var(--font-color);
+    font-family: Teko, Helvetica, sans-serif;
+    font-size: 3rem;
+    /* cursor: default; */
+}
+
+a {
+    /* property: value */
+    font-family: Teko, Helvetica, sans-serif;
+    text-align: center;
+    text-decoration: none;
+    -webkit-user-select: none;
+    user-select: none;
+    color: var(--font-color);
+}
+button {
+    /* property: value */
+    font-family: Teko, Helvetica, sans-serif;
+    text-align: center;
+    text-decoration: none;
+    -webkit-user-select: none;
+    user-select: none;
+    color: var(--font-color);
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 3rem;
+}
+
+span {
+    font-family: Teko, Helvetica, sans-serif;
+}
+
+select {
+    appearance: none;
+    font-family: Teko, Helvetica, sans-serif;
+    -webkit-user-select: none;
+    user-select: none;
+    color: var(--font-color);
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 5rem;
+    }
+    h2 {
+        font-size: 4.2rem;
+    }
+    h3 {
+        font-size: 3.4rem;
+    }
+    h4 {
+        font-size: 2.6rem;
+    }
+    h5 {
+        font-size: 2.2rem;
+    }
+    h6 {
+        font-size: 1.8rem;
+    }
+    p {
+        font-size: 2.2rem;
+    }
+    li {
+        font-size: 2.2rem;
+    }
+    div {
+        font-size: 2.2rem;
+    }
+
+    button {
+        font-size: 2.2rem;
+    }
+    
+}

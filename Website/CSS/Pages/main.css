@@ -1,0 +1,493 @@
+
+
+
+/* Remove scrollbar */
+/* body::-webkit-scrollbar {
+    display: none;
+} */
+
+html {
+    overscroll-behavior: none;
+    caret-color: transparent;
+    width: 100%;
+    /* overflow: hidden; */
+    animation: screenLock 7s ease-out forwards;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Background */
+.bg {
+    width: 100%;
+    height: 100%;
+    background: var(--main-gradient);
+    background-size: cover;
+    object-fit: cover;
+    position: fixed;
+    top: 0;
+    z-index: -1;
+}
+
+
+
+
+/*! -------- */
+/*! Sections */
+/*! -------- */
+
+/** Main Section */
+
+section.headers {
+    width: 100%;
+    min-height: 500px;
+    height: 85lvh;
+    display: flex;
+    flex-direction: row;
+    z-index: 1;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+}
+
+.htextSection {
+    width: 60%;
+    align-self: center;
+}
+
+.mainImgContainer {
+    width: 40%;
+    align-self: center;
+    margin: 0 auto 0 8vw;
+
+
+}
+
+.mainImg {
+    width: 27vw;
+    height: 27vw;
+    border-radius: 7px;
+    box-shadow: 0px 0px 6px 1px var(--main-shadow);
+    transition-duration: 0.6s;
+
+
+}
+
+.mainImg:hover {
+    translate: 0, -10px;
+    box-shadow: 0px 0px 40px 1px var(--main-shadow);
+    transition-duration: 0.4s;
+    transform: rotate(4deg);
+}
+
+.skipLoad {
+    animation: hideSkip 0.5s ease-out 5s forwards;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition-duration: 0.2s;
+    z-index: 10;
+}
+
+.skipLoad:hover {
+    color: var(--utility-hover);
+}
+
+/* Animation screen text */
+.main-text {
+    position: absolute;
+    font-size: 6rem;
+    line-height: 6rem;
+    top: 43%;
+    margin: auto;
+    left: 0;
+    right: 0;
+    max-width: 70%;
+    height: 200px;
+    text-align: center;
+    text-transform: uppercase;
+    animation: mainTextHidden 4.8s ease-out 0.5s forwards;
+}
+
+.main-text span {
+    position: relative;
+    opacity: 0;
+    animation: textAdd 0.5s ease-out 0.5s forwards;
+}
+
+
+
+.stParagraph {
+    margin: 20px 0 20px 50px;
+    line-height: 3vw;
+    width: 50vw;
+    font-weight: 10;
+}
+
+.main-button {
+    text-align: center;
+    margin: 0 0 0 50px;
+    padding: 10px 0 10px 0;
+    background-color: transparent;
+    width: 90%;
+    border-radius: 4px;
+    border: 4px solid var(--main-color);
+    transition-duration: 0.5s; 
+}
+
+.main-button:hover {
+    background-color: var(--main-color);
+    transition-duration: 0.5s;
+    box-shadow: var(--main-shadow) 1px 1px 10px 1px; 
+}
+
+
+/* The main text by the image, after animation screen */
+.secondary-text {
+    line-height: 6rem;
+    width: 730px;
+    font-weight: 400;
+    width: 100%;
+    height: auto;
+    margin: 0 0 10px 50px;
+    text-transform: uppercase;
+    opacity: 0;
+}
+
+.steps {
+    padding: 10px 0 10px 0;
+    
+}
+/* STEPS Section */
+.step1 {
+    background: var(--step1-color);
+    
+}
+
+.step2 {
+    background: var(--step2-color);
+}
+
+.step3 {
+    background: var(--step3-color);
+}
+
+
+.step1,
+.step2,
+.step3 {
+    /* backdrop-filter: blur(2px); */
+    border-radius: 7px;
+    padding: 50px;
+    overflow: hidden; /*Makes it so animation comes in only from the card box*/
+
+
+    display: flex;
+    flex-direction: row;
+    max-width: 80vw;
+    margin: 75px auto 75px auto;
+    transition-duration: 0.3s;
+    box-shadow: var(--main-shadow) 0px 0px 5px 1px;
+
+}
+.step1.active,
+.step2.active,
+.step3.active {
+    box-shadow: var(--main-shadow) 0px 0px 25px 0px;
+    transform: translate(0, -10px);
+    transition-duration: 0.7s;
+}
+.step-flex {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 0 0;
+    max-width: 700px;
+    margin-right: auto;
+}
+
+.step1 h2,
+.step2 h2,
+.step3 h2 {
+    margin: 0 5% 0 0.5%;
+    align-self: center;
+    text-align: center;
+    width: 120px;
+
+
+}
+
+.step1 h3,
+.step2 h3,
+.step3 h3 {
+    margin: 0 0 0 0;
+    
+
+}
+
+.step1 p,
+.step2 p,
+.step3 p {
+    flex-direction: column;
+}
+.icon-tabler {
+    width: 10vw;
+    height: 10vw;
+
+    
+}
+
+
+/* YOU'RE SET SECTION */
+.steps-end {
+    background-color: var(--steps-end-color);
+    margin: 25px 0 0 0;
+    padding: 10vw 0 10vw 0;
+    
+
+}
+
+.steps-end-container {
+    width: 50%;
+    margin: 0 auto 0 auto;
+    /* height: 500px; */
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+ 
+}
+.steps-end-container h2 {
+    text-transform: uppercase;
+    width: 90vw;
+}
+
+.btnRift {
+
+    border: 4px solid var(--main-color);
+    border-radius: 4px;
+    padding: 6px 50px 6px 50px;
+
+    margin: 20px 0 20px 0;
+    transition-duration: 0.3s;
+
+    text-shadow: #91bded00 3px 3px 4px;
+}
+
+.btnRift:hover {
+    background-color: var(--main-color);
+    transition-duration: 0.2s;
+
+}
+
+
+
+/*! --------------- */
+/*! End Of Sections */
+/*! --------------- */
+
+/* ---------- */
+/* ANIMATIONS */
+/* ---------- */
+
+
+@keyframes mainTextHidden {
+    0% {
+        opacity: 1;
+    }
+    95% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+
+}
+
+@keyframes textAdd {
+    0% {
+        top: 1vw;
+        opacity: 0;
+        color: var(--footer-color);
+    }
+
+    50% {
+        top: -0.5vw;
+        color: var(--main-color);
+    }
+
+    100% {
+        top: 0vw;
+        opacity: 1;
+        color: var(--font-color);
+    }
+
+}
+
+@keyframes screenLock {
+    0% {
+        overflow: hidden;
+    }
+
+    99.9% {
+        overflow: hidden;
+    }
+
+    100% {
+        overflow-x: hidden;
+        overflow-y: scroll;
+    }
+
+}
+
+@keyframes hideSkip {
+    0% {
+        opacity: 1;
+    }
+
+    99.9% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0;
+        display: none;
+    }
+
+}
+
+
+/* ----------------- */
+/* END OF ANIMATIONS */
+/* ----------------- */
+
+
+/*! ---------------- */
+/*! Class Animations */
+/*! ---------------- */
+
+
+/* MOBILE */
+
+@media (max-width: 750px) {
+
+    .main-text {
+        font-size: 9vw;
+        line-height: 8vw;
+        max-width: 100%;
+
+    }
+
+    /* Hero/Main Section */
+    section.headers {
+        flex-direction: column;
+        height: 90vh;
+    }
+    .headers .mainImgContainer {
+        order: 1;
+        display: flex;
+        align-self: baseline;
+        margin: 0 0 0 0;
+        width: 100%;
+        animation-delay: 6s;
+    }
+    .headers .mainImgContainer .mainImg {
+        width: 90vw;
+        height: 180px;
+        object-fit: cover;
+        margin: 0 auto 20px auto;
+    }
+
+    .headers .htextSection {
+        order: 2;
+        align-self: baseline;
+        width: 90vw;
+        margin: 0 auto 40px auto;
+    }
+
+    .secondary-text, .stParagraph, .main-button {
+        width: 100%;
+        margin: 20px 0 0 0;
+    } 
+
+    .secondary-text {
+        line-height: 3.6rem;
+        text-wrap: nowrap;
+        animation-delay: 6.2s;
+    }
+    .stParagraph {
+        line-height: 3rem;
+        animation-delay: 6.4s;
+    }
+    .main-button {
+        margin-top: 30px;
+        animation-delay: 6.6s;
+    }
+
+    /* STEPS Section */
+
+    .step1,
+    .step2,
+    .step3 {
+        max-width: 70%;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin: 0 auto;
+        padding: 3rem;
+    }
+
+    .step2, 
+    .step3 {
+        margin-top: 50px;
+    }
+
+    .step1 h2,
+    .step2 h2,
+    .step3 h2 {
+        margin: 0 5% 20px 0;
+        align-self: baseline;
+        text-align: center;
+        width: auto;
+    }
+    .step1 h3,
+    .step2 h3,
+    .step3 h3 {
+        margin: 0 0 0 0;
+
+
+    }
+
+    .step-flex {
+        order: 3;
+    }
+
+    .icon-tabler {
+        order: 2;
+        width: 12vw;
+        height: 12vw; 
+    }
+
+
+
+
+    /* END-STEPS Section */
+    .steps-end-container {
+        width: 100%;
+        height: 80vh;
+        margin-top: 40px;
+    }
+    .steps-end-container p {
+        width: 75%;
+    }
+
+    .steps-end-container .btnRift {
+        font-size: 24px;
+        
+    }
+
+
+}
+

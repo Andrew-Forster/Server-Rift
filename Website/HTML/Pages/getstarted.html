@@ -1,0 +1,113 @@
+<!-- Andrew Forster
+   - Project Date
+   - Project
+   - Sources:
+   + 
+   + 
+ 
+   Better Comments Extension
+    ! Important
+    * Highlight
+    ? Question
+    TODO: Todo
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started...</title>
+    <link rel="icon" type="/image/jpg" href="Images/logo.png">
+
+
+    <!-- JQUERY LINKING -->
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    
+    
+    
+    <!--*----------------------------->
+    <!--* SCRIPTS & OTHER LIBRARIES -->
+    <!--*----------------------------->
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/3116842acc.js" crossorigin="anonymous"></script>
+    
+    <!-- Scroll Animations -->
+    <link rel="stylesheet" type="text/css"
+    href="https://cdn.jsdelivr.net/gh/sup3r0001/Scroll-Animator@1.0.0/Scroll%20Animator/scrollanimator.css">
+    <script
+        src="https://cdn.jsdelivr.net/gh/sup3r0001/Scroll-Animator@1.0.0/Scroll%20Animator/scrollanimator.js"></script>
+        
+        <!-- Themes & Popups -->
+        <script src="/JS/Items/display.js"></script>
+        <!--*------------------------------------>
+        <!--* END OF SCRIPTS & OTHER LIBRARIES -->
+        <!--*------------------------------------>
+
+
+
+    <!--*---------------------->
+    <!--* CSS PAGE LINKING'S -->
+    <!--*---------------------->
+
+    <link rel="stylesheet" type="text/css" href="/CSS/styles.css">
+    <link rel="stylesheet" type="text/css" href="/CSS/Pages/getstarted.css">
+    <link rel="stylesheet" type="text/css" href="">
+
+    <!--*------------------------>
+    <!--* End of CSS LINKING'S -->
+    <!--*------------------------>
+
+    <script src="/JS/Pages/getstarted.js" defer></script>
+
+    <!-- Navbar -->
+    <div id="nav-placeholder"></div>
+</head>
+
+<body>
+    <div id="content" class="content">
+        <section class="step1">
+            <h2>STEP 1 - Choose your interests</h2>
+            <div class="interests">
+                <input type="checkbox" id="cb1">
+                <label for="cb1" class="interest1">Social   <span><span></span></span></label>
+                <input type="checkbox" id="cb2">
+                <label for="cb2" class="interest2">Anime    <span><span></span></span></label>
+                <input type="checkbox" id="cb3">
+                <label for="cb3" class="interest3">Giveaway <span><span></span></span></label>
+                <input type="checkbox" id="cb4">
+                <label for="cb4" class="interest4">Minecraft<span><span></span></span></label>
+                <input type="checkbox" id="cb5">
+                <label for="cb5" class="interest5">Roblox   <span><span></span></span></label>
+                <input type="checkbox" id="cb6">
+                <label for="cb6" class="interest6">Fortnite <span><span></span></span></label>
+                <input type="checkbox" id="cb7">
+                <label for="cb7" class="interest7">Music    <span><span></span></span></label>
+                <input type="checkbox" id="cb8">
+                <label for="cb8" class="interest8">Meme     <span><span></span></span></label>
+            </div>
+            <div class="s1endblock">
+                <button class="s1continue">Continue</button>
+                <p><strong>TIP: </strong> You can always come back and change your interests. Just go to <br><strong>Account </strong>-><strong> Preferences </strong>-><strong> Configure Server Interests</strong></p>
+            </div>
+        </section>
+    </div>
+
+</body>
+
+</html>
+
+<!-- Navbar JS Code -->
+<script>
+    $(function () {
+        $("#nav-placeholder").load("/HTML/Items/navbar.html",
+            function () {
+                $(".main-nav li button:contains('Get Started')").addClass("active");
+            });
+    });
+</script>
+
+
+
+<div class="bg"></div>

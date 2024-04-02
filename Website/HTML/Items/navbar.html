@@ -1,0 +1,76 @@
+<!-- Andrew Forster
+   - Project Date
+   - Project
+   - Sources:
+   + 
+   + 
+
+   Better Comments Extension
+    ! Important
+    * Highlight
+    ? Question
+    TODO: Todo
+ -->
+  
+<script src="/JS/defaults.js"></script>
+<script src="https://kit.fontawesome.com/3116842acc.js" crossorigin="anonymous"></script>
+<script src="/JS/Items/navbar.js"></script>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+<link rel="stylesheet" type="text/css" href="/CSS/Items/navbar.css">
+
+
+<div class="alert">
+    <div>
+        <h6></h6>
+        <button></button>
+    </div>
+</div>
+
+<nav class="onload_shift animation-delay5-5 onload-animation" data-odelay="0.5">
+    <!-- Logo -->
+    <a class="logo-container topindex" id="logo">
+        <img class="logoimg" src="/Images/logo.png" alt="Server Rift Logo" draggable="false">
+    </a>
+    <!-- 
+        TODO: For the logo, will use JS to add the letters in a staggered way,
+        TODO: so that the letters appear one after the other, with a slight delay.
+        TODO: JS will also have the div fade in from the top using transform then,
+        TODO: transfer the text to a stationary div for the next letter to appear.
+      -->
+
+
+
+
+    <!-- Mobile Menu -->
+    <div class="navpopup" id="navpopup"></div>
+    <!-- Main Navbar Navigation -->
+    <div class="nav-control"> <!-- Controls mobile response-->
+        <ul class="main-nav">
+            <li class="onload_shift animation-delay5-6 onload-animation" data-odelay="0.6"><a href="/index.html"><button
+                        id="homeNavBtn">Home</button></a></li>
+            <!-- <i class="fa-solid fa-house"></i> -->
+
+            <li class="onload_shift animation-delay5-7 onload-animation" data-odelay="0.7"><a
+                    href="/HTML/Pages/getstarted.html"><button>Get Started</button></a></li>
+            <li class="onload_shift animation-delay5-8 onload-animation" data-odelay="0.8"><a
+                    href="/HTML/Pages/explore.html"><button>Explore</button></a></li>
+
+            <!-- Right hand Navigation -->
+
+        </ul>
+        <ul class="secondary-nav">
+            <li class="snbtn onload_shift animation-delay6 onload-animation" data-odelay="1" id="login"><a
+                    href="https://discord.com/oauth2/authorize?client_id=770772228513071174&response_type=token&redirect_uri=http%3A%2F%2F127.0.0.1%3A5502%2Fauth%2Fdiscord&scope=identify+guilds+guilds.join+guilds.members.read">
+                    <button>Login</button></a></li>
+            <li><a href="/HTML/Pages/account.html"><button class="smooth" title="Profile"><i class="fa-solid fa-user profile"></i></button></a></li>
+
+
+            <div id="nav-icon" onclick="openNav()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </ul>
+    </div>
+    <!-- Nav Icon -->
+</nav>

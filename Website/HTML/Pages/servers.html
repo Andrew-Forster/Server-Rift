@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Server Applications</title>
+    <link rel="icon" type="/image/jpg" href="Images/logo.png">
+    
+    <!-- JQUERY LINKING -->
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+    <!-- Favicon -->
+    <link rel="icon" type="/image/jpg" href="Images/logo.png">
+
+
+
+    <!--*----------------------------->
+    <!--* SCRIPTS & OTHER LIBRARIES -->
+    <!--*----------------------------->
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/3116842acc.js" crossorigin="anonymous"></script>
+
+    <!-- Scroll Animations -->
+    <link rel="stylesheet" type="text/css" href="/CSS/Items/scrollanimator.css">
+    <script src="/JS/Items/scrollanimator.js"></script>
+
+
+    <!--*------------------------------------>
+    <!--* END OF SCRIPTS & OTHER LIBRARIES -->
+    <!--*------------------------------------>
+
+
+
+    <!--*------------------>
+    <!--* PAGE LINKING'S -->
+    <!--*------------------>
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/CSS/styles.css">
+    <link rel="stylesheet" type="text/css" href="/CSS/Pages/main.css">
+    <!-- JS -->
+
+
+    <!--*------------------------->
+    <!--* End of PAGE LINKING'S -->
+    <!--*------------------------->
+
+
+    <div id="nav-placeholder"></div>
+</head>
+<body>
+    
+</body>
+</html>
+
+<script>
+    $(function () {
+        $("#nav-placeholder").load("/HTML/Items/navbar.html",
+            function () {
+                $(".main-nav li button:contains('Get Started')").addClass("active");
+            });
+    });
+</script>

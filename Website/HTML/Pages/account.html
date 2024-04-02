@@ -1,0 +1,111 @@
+<!-- Andrew Forster
+   - Project Date
+   - Project
+   - Sources:
+   + 
+   + 
+
+   Better Comments Extension
+    ! Important
+    * Highlight
+    ? Question
+    TODO: Todo
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="/image/jpg" href="Images/logo.png">
+    <title>Your SR Account</title>
+
+    <!-- JQUERY LINKING -->
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+    <!--*---------------------->
+    <!--* CSS PAGE LINKING'S -->
+    <!--*---------------------->
+
+    <link rel="stylesheet" type="text/css" href="/CSS/styles.css" />
+    <link rel="stylesheet" type="text/css" href="/CSS/Pages/account.css" />
+
+    <!--*------------------------>
+    <!--* End of CSS LINKING'S -->
+    <!--*------------------------>
+
+    <script src="/JS/Pages/account.js" defer></script>
+
+    <!-- Navbar -->
+    <div id="nav-placeholder"></div>
+    <div class="settingsbg"></div>
+  </head>
+
+  <body>
+    <main class="content" id="content">
+      <section class="asmain">
+        <!-- Account Settings Main -->
+        <img
+          class="accountImg"
+          id="accountImg"
+          src="/Images/settings-plchldr-img.png"
+          alt="Image of your account"
+        />
+        <h3>Your Account</h3>
+    
+        <div class="card-container">
+          <div class="card">
+            <div class="card-header">
+              <h3>Notifications</h3>
+            </div>
+            <div class="card-body">
+              <button id="notifs">Configure</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Preferences</h3>
+            </div>
+            <div class="card-body">
+              <button id="prefs">Configure</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Settings</h3>
+            </div>
+            <div class="card-body">
+              <button id="settings">View</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h3>Support</h3>
+            </div>
+            <div class="card-body">
+              <a target="_blank"><button>Contact</button></a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+
+    <div id="footer-placeholder"></div>
+  </body>
+</html>
+
+<!-- Navbar JS Code -->
+<script>
+  $(function () {
+    $("#nav-placeholder").load("/HTML/Items/navbar.html");
+  });
+</script>
+
+<!-- Footer JS Code -->
+<script>
+  
+  $(function () {
+    $("#footer-placeholder").load("/HTML/Items/footer.html");
+  });
+</script>

@@ -1,0 +1,47 @@
+body {
+    background-color: var(--settingsbg);
+}
+
+main {
+    color: var(--font-color);
+    margin: 8rem auto;
+    width: 90%;
+    max-width: 800px;
+}
+
+
+
+h1 {
+    text-transform: uppercase;
+    margin: 0 0 0 0;
+}
+
+h3 {
+    scroll-margin-top: 30vh;
+    font-weight: 700;
+}
+
+a {
+    color: var(--main-color);
+    font-weight: 100;
+    user-select: all;
+}
+
+strong {
+    font-weight: 600;
+}
+
+main button {
+    color: var(--font-color);
+    border: 5px solid var(--main-color);
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+
+main button:hover {
+    background-color: var(--main-color);
+    transition-duration: 0.5s;
+    box-shadow: var(--main-shadow) 1px 1px 5px 1px;
+}

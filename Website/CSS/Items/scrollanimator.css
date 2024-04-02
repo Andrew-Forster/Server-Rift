@@ -1,0 +1,795 @@
+/* Animate On Scroll Library */
+html {
+    overflow-x: hidden;
+    }
+.sa {
+    transform: translateX(-250px);
+    opacity: 0;
+    transition: 1s;
+}
+.sa-custom {
+    transition: 1s;
+}
+
+.sa.active {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+
+.sa-right {
+    transform: translateX(250px);
+    opacity: 0;
+    transition: 1s;
+    overflow: hidden;
+}
+
+.sa-right.active {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+
+.sa-zoom {
+    transform: scale(0);
+    opacity: 0;
+    transition: 1s;
+}
+
+.sa-zoom.active {
+    transform: scale(1);
+    opacity: 1;
+}
+
+
+.sa-flip {
+    transform: rotate3d(0, 1, 0, 90deg);
+    opacity: 0;
+    transition: 1s;
+    transition-delay: 0s;
+    
+}
+
+.sa-flip.active {
+    transform: rotate3d( 0, 1, 0, 0deg);
+    opacity: 1;
+    
+}
+
+.sa-bottom {
+    transform: translateY(250px);
+    opacity: 0;
+    transition: 1s;
+}
+
+.sa-bottom.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.sa-top {
+    transform: translateY(-250px);
+    opacity: 0;
+    transition: 1s;
+}
+
+.sa-top.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Animation Based Effects */
+
+.sa-shift {
+    transform: translateX(-6%);
+    opacity: 0;
+}
+
+.sa-shift.active {
+    animation: smoothShift 0.4s ease-in-out 0s 1 forwards;
+}
+
+/* Reversing Shift on Scroll */
+
+/* DURATIONS */
+.sa-duration0_1 { transition-duration: 0.1s; }
+.sa-duration0_2 { transition-duration: 0.2s; }
+.sa-duration0_3 { transition-duration: 0.3s; }
+.sa-duration0_4 { transition-duration: 0.4s; }
+.sa-duration0_5 { transition-duration: 0.5s; }
+.sa-duration0_6 { transition-duration: 0.6s; }
+.sa-duration0_7 { transition-duration: 0.7s; }
+.sa-duration0_8 { transition-duration: 0.8s; }
+.sa-duration0_9 { transition-duration: 0.9s; }
+.sa-duration1   { transition-duration: 1s; }
+.sa-duration1_1 { transition-duration: 1.1s; } 
+.sa-duration1_2 { transition-duration: 1.2s; }
+.sa-duration1_3 { transition-duration: 1.3s; }
+.sa-duration1_4 { transition-duration: 1.4s; }
+.sa-duration1_5 { transition-duration: 1.5s; }
+.sa-duration1_6 { transition-duration: 1.6s; }
+.sa-duration1_7 { transition-duration: 1.7s; }
+.sa-duration1_8 { transition-duration: 1.8s; }
+.sa-duration1_9 { transition-duration: 1.9s; }
+.sa-duration2   { transition-duration: 2s; }
+.sa-duration2_1 { transition-duration: 2.1s; }
+.sa-duration2_2 { transition-duration: 2.2s; }
+.sa-duration2_3 { transition-duration: 2.3s; }
+.sa-duration2_4 { transition-duration: 2.4s; }
+.sa-duration2_5 { transition-duration: 2.5s; }
+.sa-duration2_6 { transition-duration: 2.6s; }
+.sa-duration2_7 { transition-duration: 2.7s; }
+.sa-duration2_8 { transition-duration: 2.8s; }
+.sa-duration2_9 { transition-duration: 2.9s; }
+.sa-duration3   { transition-duration: 3s; }
+.sa-duration3_1 { transition-duration: 3.1s; }
+.sa-duration3_2 { transition-duration: 3.2s; }
+.sa-duration3_3 { transition-duration: 3.3s; }
+.sa-duration3_4 { transition-duration: 3.4s; }
+.sa-duration3_5 { transition-duration: 3.5s; }
+.sa-duration3_6 { transition-duration: 3.6s; }
+.sa-duration3_7 { transition-duration: 3.7s; }
+.sa-duration3_8 { transition-duration: 3.8s; }
+.sa-duration3_9 { transition-duration: 3.9s; }
+.sa-duration4   { transition-duration: 4s; }
+.sa-duration4_1 { transition-duration: 4.1s; }
+.sa-duration4_2 { transition-duration: 4.2s; }
+.sa-duration4_3 { transition-duration: 4.3s; }
+.sa-duration4_4 { transition-duration: 4.4s; }
+.sa-duration4_5 { transition-duration: 4.5s; }
+.sa-duration4_6 { transition-duration: 4.6s; }
+.sa-duration4_7 { transition-duration: 4.7s; }
+.sa-duration4_8 { transition-duration: 4.8s; }
+.sa-duration4_9 { transition-duration: 4.9s; }
+.sa-duration5   { transition-duration: 5s; }
+.sa-duration5_1 { transition-duration: 5.1s; }
+.sa-duration5_2 { transition-duration: 5.2s; }
+.sa-duration5_3 { transition-duration: 5.3s; }
+.sa-duration5_4 { transition-duration: 5.4s; }
+.sa-duration5_5 { transition-duration: 5.5s; }
+.sa-duration5_6 { transition-duration: 5.6s; }
+.sa-duration5_7 { transition-duration: 5.7s; }
+.sa-duration5_8 { transition-duration: 5.8s; }
+.sa-duration5_9 { transition-duration: 5.9s; }
+.sa-duration6   { transition-duration: 6s; }
+.sa-duration6_1 { transition-duration: 6.1s; }
+.sa-duration6_2 { transition-duration: 6.2s; }
+.sa-duration6_3 { transition-duration: 6.3s; }
+.sa-duration6_4 { transition-duration: 6.4s; }
+.sa-duration6_5 { transition-duration: 6.5s; }
+.sa-duration6_6 { transition-duration: 6.6s; }
+.sa-duration6_7 { transition-duration: 6.7s; }
+.sa-duration6_8 { transition-duration: 6.8s; }
+.sa-duration6_9 { transition-duration: 6.9s; }
+.sa-duration7   { transition-duration: 7s; }
+.sa-duration7_1 { transition-duration: 7.1s; }
+.sa-duration7_2 { transition-duration: 7.2s; }
+.sa-duration7_3 { transition-duration: 7.3s; }
+.sa-duration7_4 { transition-duration: 7.4s; }
+.sa-duration7_5 { transition-duration: 7.5s; }
+.sa-duration7_6 { transition-duration: 7.6s; }
+.sa-duration7_7 { transition-duration: 7.7s; }
+.sa-duration7_8 { transition-duration: 7.8s; }
+.sa-duration7_9 { transition-duration: 7.9s; }
+.sa-duration8   { transition-duration: 8s; }
+.sa-duration8_1 { transition-duration: 8.1s; }
+.sa-duration8_2 { transition-duration: 8.2s; }
+.sa-duration8_3 { transition-duration: 8.3s; }
+.sa-duration8_4 { transition-duration: 8.4s; }
+.sa-duration8_5 { transition-duration: 8.5s; }
+.sa-duration8_6 { transition-duration: 8.6s; }
+.sa-duration8_7 { transition-duration: 8.7s; }
+.sa-duration8_8 { transition-duration: 8.8s; }
+.sa-duration8_9 { transition-duration: 8.9s; }
+.sa-duration9   { transition-duration: 9s; }
+.sa-duration9_1 { transition-duration: 9.1s; }
+.sa-duration9_2 { transition-duration: 9.2s; }
+.sa-duration9_3 { transition-duration: 9.3s; }
+.sa-duration9_4 { transition-duration: 9.4s; }
+.sa-duration9_5 { transition-duration: 9.5s; }
+.sa-duration9_6 { transition-duration: 9.6s; }
+.sa-duration9_7 { transition-duration: 9.7s; }
+.sa-duration9_8 { transition-duration: 9.8s; }
+.sa-duration9_9 { transition-duration: 9.9s; }
+.sa-duration10   { transition-duration: 10s; }
+.sa-duration10_1 { transition-duration: 10.1s; }
+.sa-duration10_2 { transition-duration: 10.2s; }
+.sa-duration10_3 { transition-duration: 10.3s; }
+.sa-duration10_4 { transition-duration: 10.4s; }
+.sa-duration10_5 { transition-duration: 10.5s; }
+.sa-duration10_6 { transition-duration: 10.6s; }
+.sa-duration10_7 { transition-duration: 10.7s; }
+.sa-duration10_8 { transition-duration: 10.8s; }
+.sa-duration10_9 { transition-duration: 10.9s; }
+.sa-duration11   { transition-duration: 11s; }
+.sa-duration11_1 { transition-duration: 11.1s; }
+.sa-duration11_2 { transition-duration: 11.2s; }
+.sa-duration11_3 { transition-duration: 11.3s; }
+.sa-duration11_4 { transition-duration: 11.4s; }
+.sa-duration11_5 { transition-duration: 11.5s; }
+.sa-duration11_6 { transition-duration: 11.6s; }
+.sa-duration11_7 { transition-duration: 11.7s; }
+.sa-duration11_8 { transition-duration: 11.8s; }
+.sa-duration11_9 { transition-duration: 11.9s; }
+.sa-duration12   { transition-duration: 12s; }
+.sa-duration12_1 { transition-duration: 12.1s; }
+.sa-duration12_2 { transition-duration: 12.2s; }
+.sa-duration12_3 { transition-duration: 12.3s; }
+.sa-duration12_4 { transition-duration: 12.4s; }
+.sa-duration12_5 { transition-duration: 12.5s; }
+.sa-duration12_6 { transition-duration: 12.6s; }
+.sa-duration12_7 { transition-duration: 12.7s; }
+.sa-duration12_8 { transition-duration: 12.8s; }
+.sa-duration12_9 { transition-duration: 12.9s; }
+.sa-duration13   { transition-duration: 13s; }
+.sa-duration13_1 { transition-duration: 13.1s; }
+.sa-duration13_2 { transition-duration: 13.2s; }
+.sa-duration13_3 { transition-duration: 13.3s; }
+.sa-duration13_4 { transition-duration: 13.4s; }
+.sa-duration13_5 { transition-duration: 13.5s; }
+.sa-duration13_6 { transition-duration: 13.6s; }
+.sa-duration13_7 { transition-duration: 13.7s; }
+.sa-duration13_8 { transition-duration: 13.8s; }
+.sa-duration13_9 { transition-duration: 13.9s; }
+.sa-duration14   { transition-duration: 14s; }
+.sa-duration14_1 { transition-duration: 14.1s; }
+.sa-duration14_2 { transition-duration: 14.2s; }
+.sa-duration14_3 { transition-duration: 14.3s; }
+.sa-duration14_4 { transition-duration: 14.4s; }
+.sa-duration14_5 { transition-duration: 14.5s; }
+.sa-duration14_6 { transition-duration: 14.6s; }
+.sa-duration14_7 { transition-duration: 14.7s; }
+.sa-duration14_8 { transition-duration: 14.8s; }
+.sa-duration14_9 { transition-duration: 14.9s; }
+.sa-duration15   { transition-duration: 15s; }
+/* END OF DURATIONS */
+
+/* Easing Settings */
+
+.sa-ease {
+    transition-timing-function: ease;
+}
+.sa-easein {
+    transition-timing-function: ease-in;
+}
+.sa-easeinout {
+    transition-timing-function: ease-in-out;
+}
+.sa-easeout {
+    transition-timing-function: ease-out;
+}
+
+.sa-easeoutcubic {
+    transition-timing-function: cubic-bezier(.25, .46, .45, .94);
+
+}
+
+.sa-easeincubic {
+    transition-timing-function: cubic-bezier(.55, .085, .68, .53);
+}
+
+.sa-easestrong {
+    transition-timing-function: cubic-bezier(.77,0,.175,1);
+}
+
+/* End of Easing Settings */
+
+/* DELAYS */
+.sa-delay0_1 { transition-delay: 0.1s; }
+.sa-delay0_2 { transition-delay: 0.2s; }
+.sa-delay0_3 { transition-delay: 0.3s; }
+.sa-delay0_4 { transition-delay: 0.4s; }
+.sa-delay0_5 { transition-delay: 0.5s; }
+.sa-delay0_6 { transition-delay: 0.6s; }
+.sa-delay0_7 { transition-delay: 0.7s; }
+.sa-delay0_8 { transition-delay: 0.8s; }
+.sa-delay0_9 { transition-delay: 0.9s; }
+.sa-delay1 { transition-delay: 1s; }
+.sa-delay1_1 { transition-delay: 1.1s; }
+.sa-delay1_2 { transition-delay: 1.2s; }
+.sa-delay1_3 { transition-delay: 1.3s; }
+.sa-delay1_4 { transition-delay: 1.4s; }
+.sa-delay1_5 { transition-delay: 1.5s; }
+.sa-delay1_6 { transition-delay: 1.6s; }
+.sa-delay1_7 { transition-delay: 1.7s; }
+.sa-delay1_8 { transition-delay: 1.8s; }
+.sa-delay1_9 { transition-delay: 1.9s; }
+.sa-delay2 { transition-delay: 2s; }
+.sa-delay2_1 { transition-delay: 2.1s; }
+.sa-delay2_2 { transition-delay: 2.2s; }
+.sa-delay2_3 { transition-delay: 2.3s; }
+.sa-delay2_4 { transition-delay: 2.4s; }
+.sa-delay2_5 { transition-delay: 2.5s; }
+.sa-delay2_6 { transition-delay: 2.6s; }
+.sa-delay2_7 { transition-delay: 2.7s; }
+.sa-delay2_8 { transition-delay: 2.8s; }
+.sa-delay2_9 { transition-delay: 2.9s; }
+.sa-delay3 { transition-delay: 3s; }
+.sa-delay3_1 { transition-delay: 3.1s; }
+.sa-delay3_2 { transition-delay: 3.2s; }
+.sa-delay3_3 { transition-delay: 3.3s; }
+.sa-delay3_4 { transition-delay: 3.4s; }
+.sa-delay3_5 { transition-delay: 3.5s; }
+.sa-delay3_6 { transition-delay: 3.6s; }
+.sa-delay3_7 { transition-delay: 3.7s; }
+.sa-delay3_8 { transition-delay: 3.8s; }
+.sa-delay3_9 { transition-delay: 3.9s; }
+.sa-delay4 { transition-delay: 4s; }
+.sa-delay4_1 { transition-delay: 4.1s; }
+.sa-delay4_2 { transition-delay: 4.2s; }
+.sa-delay4_3 { transition-delay: 4.3s; }
+.sa-delay4_4 { transition-delay: 4.4s; }
+.sa-delay4_5 { transition-delay: 4.5s; }
+.sa-delay4_6 { transition-delay: 4.6s; }
+.sa-delay4_7 { transition-delay: 4.7s; }
+.sa-delay4_8 { transition-delay: 4.8s; }
+.sa-delay4_9 { transition-delay: 4.9s; }
+.sa-delay5 { transition-delay: 5s; }
+.sa-delay5_1 { transition-delay: 5.1s; }
+.sa-delay5_2 { transition-delay: 5.2s; }
+.sa-delay5_3 { transition-delay: 5.3s; }
+.sa-delay5_4 { transition-delay: 5.4s; }
+.sa-delay5_5 { transition-delay: 5.5s; }
+.sa-delay5_6 { transition-delay: 5.6s; }
+.sa-delay5_7 { transition-delay: 5.7s; }
+.sa-delay5_8 { transition-delay: 5.8s; }
+.sa-delay5_9 { transition-delay: 5.9s; }
+.sa-delay6 { transition-delay: 6s; }
+.sa-delay6_1 { transition-delay: 6.1s; }
+.sa-delay6_2 { transition-delay: 6.2s; }
+.sa-delay6_3 { transition-delay: 6.3s; }
+.sa-delay6_4 { transition-delay: 6.4s; }
+.sa-delay6_5 { transition-delay: 6.5s; }
+.sa-delay6_6 { transition-delay: 6.6s; }
+.sa-delay6_7 { transition-delay: 6.7s; }
+.sa-delay6_8 { transition-delay: 6.8s; }
+.sa-delay6_9 { transition-delay: 6.9s; }
+.sa-delay7 { transition-delay: 7s; }
+.sa-delay7_1 { transition-delay: 7.1s; }
+.sa-delay7_2 { transition-delay: 7.2s; }
+.sa-delay7_3 { transition-delay: 7.3s; }
+.sa-delay7_4 { transition-delay: 7.4s; }
+.sa-delay7_5 { transition-delay: 7.5s; }
+.sa-delay7_6 { transition-delay: 7.6s; }
+.sa-delay7_7 { transition-delay: 7.7s; }
+.sa-delay7_8 { transition-delay: 7.8s; }
+.sa-delay7_9 { transition-delay: 7.9s; }
+.sa-delay8 { transition-delay: 8s; }
+.sa-delay8_1 { transition-delay: 8.1s; }
+.sa-delay8_2 { transition-delay: 8.2s; }
+.sa-delay8_3 { transition-delay: 8.3s; }
+.sa-delay8_4 { transition-delay: 8.4s; }
+.sa-delay8_5 { transition-delay: 8.5s; }
+.sa-delay8_6 { transition-delay: 8.6s; }
+.sa-delay8_7 { transition-delay: 8.7s; }
+.sa-delay8_8 { transition-delay: 8.8s; }
+.sa-delay8_9 { transition-delay: 8.9s; }
+.sa-delay9 { transition-delay: 9s; }
+.sa-delay9_1 { transition-delay: 9.1s; }
+.sa-delay9_2 { transition-delay: 9.2s; }
+.sa-delay9_3 { transition-delay: 9.3s; }
+.sa-delay9_4 { transition-delay: 9.4s; }
+.sa-delay9_5 { transition-delay: 9.5s; }
+.sa-delay9_6 { transition-delay: 9.6s; }
+.sa-delay9_7 { transition-delay: 9.7s; }
+.sa-delay9_8 { transition-delay: 9.8s; }
+.sa-delay9_9 { transition-delay: 9.9s; }
+.sa-delay10 { transition-delay: 10s; }
+.sa-delay10_1 { transition-delay: 10.1s; }
+.sa-delay10_2 { transition-delay: 10.2s; }
+.sa-delay10_3 { transition-delay: 10.3s; }
+.sa-delay10_4 { transition-delay: 10.4s; }
+.sa-delay10_5 { transition-delay: 10.5s; }
+.sa-delay10_6 { transition-delay: 10.6s; }
+.sa-delay10_7 { transition-delay: 10.7s; }
+.sa-delay10_8 { transition-delay: 10.8s; }
+.sa-delay10_9 { transition-delay: 10.9s; }
+.sa-delay11 { transition-delay: 11s; }
+.sa-delay11_1 { transition-delay: 11.1s; }
+.sa-delay11_2 { transition-delay: 11.2s; }
+.sa-delay11_3 { transition-delay: 11.3s; }
+.sa-delay11_4 { transition-delay: 11.4s; }
+.sa-delay11_5 { transition-delay: 11.5s; }
+.sa-delay11_6 { transition-delay: 11.6s; }
+.sa-delay11_7 { transition-delay: 11.7s; }
+.sa-delay11_8 { transition-delay: 11.8s; }
+.sa-delay11_9 { transition-delay: 11.9s; }
+.sa-delay12 { transition-delay: 12s; }
+.sa-delay12_1 { transition-delay: 12.1s; }
+.sa-delay12_2 { transition-delay: 12.2s; }
+.sa-delay12_3 { transition-delay: 12.3s; }
+.sa-delay12_4 { transition-delay: 12.4s; }
+.sa-delay12_5 { transition-delay: 12.5s; }
+.sa-delay12_6 { transition-delay: 12.6s; }
+.sa-delay12_7 { transition-delay: 12.7s; }
+.sa-delay12_8 { transition-delay: 12.8s; }
+.sa-delay12_9 { transition-delay: 12.9s; }
+.sa-delay13 { transition-delay: 13s; }
+.sa-delay13_1 { transition-delay: 13.1s; }
+.sa-delay13_2 { transition-delay: 13.2s; }
+.sa-delay13_3 { transition-delay: 13.3s; }
+.sa-delay13_4 { transition-delay: 13.4s; }
+.sa-delay13_5 { transition-delay: 13.5s; }
+.sa-delay13_6 { transition-delay: 13.6s; }
+.sa-delay13_7 { transition-delay: 13.7s; }
+.sa-delay13_8 { transition-delay: 13.8s; }
+.sa-delay13_9 { transition-delay: 13.9s; }
+.sa-delay14 { transition-delay: 14s; }
+.sa-delay14_1 { transition-delay: 14.1s; }
+.sa-delay14_2 { transition-delay: 14.2s; }
+.sa-delay14_3 { transition-delay: 14.3s; }
+.sa-delay14_4 { transition-delay: 14.4s; }
+.sa-delay14_5 { transition-delay: 14.5s; }
+.sa-delay14_6 { transition-delay: 14.6s; }
+.sa-delay14_7 { transition-delay: 14.7s; }
+.sa-delay14_8 { transition-delay: 14.8s; }
+.sa-delay14_9 { transition-delay: 14.9s; }
+.sa-delay15 { transition-delay: 15s; }
+
+/* END OF DELAYS */
+
+
+/* ONLOAD SHIFT (Default 1s)*/
+.onload_shift { animation: smoothShift 0.4s ease-in-out 1 forwards ; opacity: 0; } 
+
+
+@keyframes smoothShift {
+    0% {
+        transform: translate(-6%);
+        opacity: 0;
+        
+        
+    }
+    40% {
+        transform: translate(3%, 0%);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(0%, 0%);
+        opacity: 1;
+    }
+}
+.onload_bottom { animation: obottom 0.4s ease-in-out 1 forwards ; opacity: 0; } 
+
+
+@keyframes obottom {
+    0% {
+        transform: translate(0%, 500px);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(0%, 0%);
+        opacity: 1;
+    }
+}
+.onload_top { animation: otop 0.4s ease-in-out 1 forwards ; opacity: 0; } 
+
+
+@keyframes otop {
+    0% {
+        transform: translate(0%, 500px);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(0%, 0%);
+        opacity: 1;
+    }
+}
+
+@keyframes cursorBtn {
+    0% {
+        cursor: default;
+    }
+    100% {
+        cursor: pointer;
+    }
+}
+
+.cursorBtn {
+    animation: cursorBtn 0.4s ease-in-out 0s 1 forwards;
+}
+
+
+.animation-delay0-1 {  animation-delay: 0.1s; }
+.animation-delay0-2 {  animation-delay: 0.2s; }
+.animation-delay0-3 {  animation-delay: 0.3s; }
+.animation-delay0-4 {  animation-delay: 0.4s; }
+.animation-delay0-5 {  animation-delay: 0.5s; }
+.animation-delay0-6 {  animation-delay: 0.6s; }
+.animation-delay0-7 {  animation-delay: 0.7s; }
+.animation-delay0-8 {  animation-delay: 0.8s; }
+.animation-delay0-9 {  animation-delay: 0.9s; }
+.animation-delay1 {    animation-delay: 1s; }
+.animation-delay1-1 {  animation-delay: 1.1s; }
+.animation-delay1-2 {  animation-delay: 1.2s; }
+.animation-delay1-3 {  animation-delay: 1.3s; }
+.animation-delay1-4 {  animation-delay: 1.4s; }
+.animation-delay1-5 {  animation-delay: 1.5s; }
+.animation-delay1-6 {  animation-delay: 1.6s; }
+.animation-delay1-7 {  animation-delay: 1.7s; }
+.animation-delay1-8 {  animation-delay: 1.8s; }
+.animation-delay1-9 {  animation-delay: 1.9s; }
+.animation-delay2 {    animation-delay: 2s; }
+.animation-delay2-1 {  animation-delay: 2.1s; }
+.animation-delay2-2 {  animation-delay: 2.2s; }
+.animation-delay2-3 {  animation-delay: 2.3s; }
+.animation-delay2-4 {  animation-delay: 2.4s; }
+.animation-delay2-5 {  animation-delay: 2.5s; }
+.animation-delay2-6 {  animation-delay: 2.6s; }
+.animation-delay2-7 {  animation-delay: 2.7s; }
+.animation-delay2-8 {  animation-delay: 2.8s; }
+.animation-delay2-9 {  animation-delay: 2.9s; }
+.animation-delay3 {    animation-delay: 3s; }
+.animation-delay3-1 {  animation-delay: 3.1s; }
+.animation-delay3-2 {  animation-delay: 3.2s; }
+.animation-delay3-3 {  animation-delay: 3.3s; }
+.animation-delay3-4 {  animation-delay: 3.4s; }
+.animation-delay3-5 {  animation-delay: 3.5s; }
+.animation-delay3-6 {  animation-delay: 3.6s; }
+.animation-delay3-7 {  animation-delay: 3.7s; }
+.animation-delay3-8 {  animation-delay: 3.8s; }
+.animation-delay3-9 {  animation-delay: 3.9s; }
+.animation-delay4 {    animation-delay: 4s; }
+.animation-delay4-1 {  animation-delay: 4.1s; }
+.animation-delay4-2 {  animation-delay: 4.2s; }
+.animation-delay4-3 {  animation-delay: 4.3s; }
+.animation-delay4-4 {  animation-delay: 4.4s; }
+.animation-delay4-5 {  animation-delay: 4.5s; }
+.animation-delay4-6 {  animation-delay: 4.6s; }
+.animation-delay4-7 {  animation-delay: 4.7s; }
+.animation-delay4-8 {  animation-delay: 4.8s; }
+.animation-delay4-9 {  animation-delay: 4.9s; }
+.animation-delay5 {    animation-delay: 5s; }
+.animation-delay5-1 {  animation-delay: 5.1s; }
+.animation-delay5-2 {  animation-delay: 5.2s; }
+.animation-delay5-3 {  animation-delay: 5.3s; }
+.animation-delay5-4 {  animation-delay: 5.4s; }
+.animation-delay5-5 {  animation-delay: 5.5s; }
+.animation-delay5-6 {  animation-delay: 5.6s; }
+.animation-delay5-7 {  animation-delay: 5.7s; }
+.animation-delay5-8 {  animation-delay: 5.8s; }
+.animation-delay5-9 {  animation-delay: 5.9s; }
+.animation-delay6 {    animation-delay: 6s; }
+.animation-delay6-1 {  animation-delay: 6.1s; }
+.animation-delay6-2 {  animation-delay: 6.2s; }
+.animation-delay6-3 {  animation-delay: 6.3s; }
+.animation-delay6-4 {  animation-delay: 6.4s; }
+.animation-delay6-5 {  animation-delay: 6.5s; }
+.animation-delay6-6 {  animation-delay: 6.6s; }
+.animation-delay6-7 {  animation-delay: 6.7s; }
+.animation-delay6-8 {  animation-delay: 6.8s; }
+.animation-delay6-9 {  animation-delay: 6.9s; }
+.animation-delay7 {    animation-delay: 7s; }
+.animation-delay7-1 {  animation-delay: 7.1s; }
+.animation-delay7-2 {  animation-delay: 7.2s; }
+.animation-delay7-3 {  animation-delay: 7.3s; }
+.animation-delay7-4 {  animation-delay: 7.4s; }
+.animation-delay7-5 {  animation-delay: 7.5s; }
+.animation-delay7-6 {  animation-delay: 7.6s; }
+.animation-delay7-7 {  animation-delay: 7.7s; }
+.animation-delay7-8 {  animation-delay: 7.8s; }
+.animation-delay7-9 {  animation-delay: 7.9s; }
+.animation-delay8 {    animation-delay: 8s; }
+.animation-delay8-1 {  animation-delay: 8.1s; }
+.animation-delay8-2 {  animation-delay: 8.2s; }
+.animation-delay8-3 {  animation-delay: 8.3s; }
+.animation-delay8-4 {  animation-delay: 8.4s; }
+.animation-delay8-5 {  animation-delay: 8.5s; }
+.animation-delay8-6 {  animation-delay: 8.6s; }
+.animation-delay8-7 {  animation-delay: 8.7s; }
+.animation-delay8-8 {  animation-delay: 8.8s; }
+.animation-delay8-9 {  animation-delay: 8.9s; }
+.animation-delay9 {    animation-delay: 9s; }
+.animation-delay9-1 {  animation-delay: 9.1s; }
+.animation-delay9-2 {  animation-delay: 9.2s; }
+.animation-delay9-3 {  animation-delay: 9.3s; }
+.animation-delay9-4 {  animation-delay: 9.4s; }
+.animation-delay9-5 {  animation-delay: 9.5s; }
+.animation-delay9-6 {  animation-delay: 9.6s; }
+.animation-delay9-7 {  animation-delay: 9.7s; }
+.animation-delay9-8 {  animation-delay: 9.8s; }
+.animation-delay9-9 {  animation-delay: 9.9s; }
+.animation-delay10 {   animation-delay: 10s; }
+.animation-delay10-1 { animation-delay: 10.1s; }
+.animation-delay10-2 { animation-delay: 10.2s; }
+.animation-delay10-3 { animation-delay: 10.3s; }
+.animation-delay10-4 { animation-delay: 10.4s; }
+.animation-delay10-5 { animation-delay: 10.5s; }
+.animation-delay10-6 { animation-delay: 10.6s; }
+.animation-delay10-7 { animation-delay: 10.7s; }
+.animation-delay10-8 { animation-delay: 10.8s; }
+.animation-delay10-9 { animation-delay: 10.9s; }
+.animation-delay11 {   animation-delay: 11s; }
+.animation-delay11-1 { animation-delay: 11.1s; }
+.animation-delay11-2 { animation-delay: 11.2s; }
+.animation-delay11-3 { animation-delay: 11.3s; }
+.animation-delay11-4 { animation-delay: 11.4s; }
+.animation-delay11-5 { animation-delay: 11.5s; }
+.animation-delay11-6 { animation-delay: 11.6s; }
+.animation-delay11-7 { animation-delay: 11.7s; }
+.animation-delay11-8 { animation-delay: 11.8s; }
+.animation-delay11-9 { animation-delay: 11.9s; }
+.animation-delay12 {   animation-delay: 12s; }
+.animation-delay12-1 { animation-delay: 12.1s; }
+.animation-delay12-2 { animation-delay: 12.2s; }
+.animation-delay12-3 { animation-delay: 12.3s; }
+.animation-delay12-4 { animation-delay: 12.4s; }
+.animation-delay12-5 { animation-delay: 12.5s; }
+.animation-delay12-6 { animation-delay: 12.6s; }
+.animation-delay12-7 { animation-delay: 12.7s; }
+.animation-delay12-8 { animation-delay: 12.8s; }
+.animation-delay12-9 { animation-delay: 12.9s; }
+.animation-delay13 {   animation-delay: 13s; }
+.animation-delay13-1 { animation-delay: 13.1s; }
+.animation-delay13-2 { animation-delay: 13.2s; }
+.animation-delay13-3 { animation-delay: 13.3s; }
+.animation-delay13-4 { animation-delay: 13.4s; }
+.animation-delay13-5 { animation-delay: 13.5s; }
+.animation-delay13-6 { animation-delay: 13.6s; }
+.animation-delay13-7 { animation-delay: 13.7s; }
+.animation-delay13-8 { animation-delay: 13.8s; }
+.animation-delay13-9 { animation-delay: 13.9s; }
+.animation-delay14 {   animation-delay: 14s; }
+.animation-delay14-1 { animation-delay: 14.1s; }
+.animation-delay14-2 { animation-delay: 14.2s; }
+.animation-delay14-3 { animation-delay: 14.3s; }
+.animation-delay14-4 { animation-delay: 14.4s; }
+.animation-delay14-5 { animation-delay: 14.5s; }
+.animation-delay14-6 { animation-delay: 14.6s; }
+.animation-delay14-7 { animation-delay: 14.7s; }
+.animation-delay14-8 { animation-delay: 14.8s; }
+.animation-delay14-9 { animation-delay: 14.9s; }
+.animation-delay15 {   animation-delay: 15s; }
+
+
+/* Animation Durations */
+.animation-duration0-1 {  animation-duration: 0.1s; }
+.animation-duration0-2 {  animation-duration: 0.2s; }
+.animation-duration0-3 {  animation-duration: 0.3s; }
+.animation-duration0-4 {  animation-duration: 0.4s; }
+.animation-duration0-5 {  animation-duration: 0.5s; }
+.animation-duration0-6 {  animation-duration: 0.6s; }
+.animation-duration0-7 {  animation-duration: 0.7s; }
+.animation-duration0-8 {  animation-duration: 0.8s; }
+.animation-duration0-9 {  animation-duration: 0.9s; }
+.animation-duration1 {    animation-duration: 1s; }
+.animation-duration1-1 {  animation-duration: 1.1s; }
+.animation-duration1-2 {  animation-duration: 1.2s; }
+.animation-duration1-3 {  animation-duration: 1.3s; }
+.animation-duration1-4 {  animation-duration: 1.4s; }
+.animation-duration1-5 {  animation-duration: 1.5s; }
+.animation-duration1-6 {  animation-duration: 1.6s; }
+.animation-duration1-7 {  animation-duration: 1.7s; }
+.animation-duration1-8 {  animation-duration: 1.8s; }
+.animation-duration1-9 {  animation-duration: 1.9s; }
+.animation-duration2 {    animation-duration: 2s; }
+.animation-duration2-1 {  animation-duration: 2.1s; }
+.animation-duration2-2 {  animation-duration: 2.2s; }
+.animation-duration2-3 {  animation-duration: 2.3s; }
+.animation-duration2-4 {  animation-duration: 2.4s; }
+.animation-duration2-5 {  animation-duration: 2.5s; }
+.animation-duration2-6 {  animation-duration: 2.6s; }
+.animation-duration2-7 {  animation-duration: 2.7s; }
+.animation-duration2-8 {  animation-duration: 2.8s; }
+.animation-duration2-9 {  animation-duration: 2.9s; }
+.animation-duration3 {    animation-duration: 3s; }
+.animation-duration3-1 {  animation-duration: 3.1s; }
+.animation-duration3-2 {  animation-duration: 3.2s; }
+.animation-duration3-3 {  animation-duration: 3.3s; }
+.animation-duration3-4 {  animation-duration: 3.4s; }
+.animation-duration3-5 {  animation-duration: 3.5s; }
+.animation-duration3-6 {  animation-duration: 3.6s; }
+.animation-duration3-7 {  animation-duration: 3.7s; }
+.animation-duration3-8 {  animation-duration: 3.8s; }
+.animation-duration3-9 {  animation-duration: 3.9s; }
+.animation-duration4 {    animation-duration: 4s; }
+.animation-duration4-1 {  animation-duration: 4.1s; }
+.animation-duration4-2 {  animation-duration: 4.2s; }
+.animation-duration4-3 {  animation-duration: 4.3s; }
+.animation-duration4-4 {  animation-duration: 4.4s; }
+.animation-duration4-5 {  animation-duration: 4.5s; }
+.animation-duration4-6 {  animation-duration: 4.6s; }
+.animation-duration4-7 {  animation-duration: 4.7s; }
+.animation-duration4-8 {  animation-duration: 4.8s; }
+.animation-duration4-9 {  animation-duration: 4.9s; }
+.animation-duration5 {    animation-duration: 5s; }
+.animation-duration5-1 {  animation-duration: 5.1s; }
+.animation-duration5-2 {  animation-duration: 5.2s; }
+.animation-duration5-3 {  animation-duration: 5.3s; }
+.animation-duration5-4 {  animation-duration: 5.4s; }
+.animation-duration5-5 {  animation-duration: 5.5s; }
+.animation-duration5-6 {  animation-duration: 5.6s; }
+.animation-duration5-7 {  animation-duration: 5.7s; }
+.animation-duration5-8 {  animation-duration: 5.8s; }
+.animation-duration5-9 {  animation-duration: 5.9s; }
+.animation-duration6 {    animation-duration: 6s; }
+.animation-duration6-1 {  animation-duration: 6.1s; }
+.animation-duration6-2 {  animation-duration: 6.2s; }
+.animation-duration6-3 {  animation-duration: 6.3s; }
+.animation-duration6-4 {  animation-duration: 6.4s; }
+.animation-duration6-5 {  animation-duration: 6.5s; }
+.animation-duration6-6 {  animation-duration: 6.6s; }
+.animation-duration6-7 {  animation-duration: 6.7s; }
+.animation-duration6-8 {  animation-duration: 6.8s; }
+.animation-duration6-9 {  animation-duration: 6.9s; }
+.animation-duration7 {    animation-duration: 7s; }
+.animation-duration7-1 {  animation-duration: 7.1s; }
+.animation-duration7-2 {  animation-duration: 7.2s; }
+.animation-duration7-3 {  animation-duration: 7.3s; }
+.animation-duration7-4 {  animation-duration: 7.4s; }
+.animation-duration7-5 {  animation-duration: 7.5s; }
+.animation-duration7-6 {  animation-duration: 7.6s; }
+.animation-duration7-7 {  animation-duration: 7.7s; }
+.animation-duration7-8 {  animation-duration: 7.8s; }
+.animation-duration7-9 {  animation-duration: 7.9s; }
+.animation-duration8 {    animation-duration: 8s; }
+.animation-duration8-1 {  animation-duration: 8.1s; }
+.animation-duration8-2 {  animation-duration: 8.2s; }
+.animation-duration8-3 {  animation-duration: 8.3s; }
+.animation-duration8-4 {  animation-duration: 8.4s; }
+.animation-duration8-5 {  animation-duration: 8.5s; }
+.animation-duration8-6 {  animation-duration: 8.6s; }
+.animation-duration8-7 {  animation-duration: 8.7s; }
+.animation-duration8-8 {  animation-duration: 8.8s; }
+.animation-duration8-9 {  animation-duration: 8.9s; }
+.animation-duration9 {    animation-duration: 9s; }
+.animation-duration9-1 {  animation-duration: 9.1s; }
+.animation-duration9-2 {  animation-duration: 9.2s; }
+.animation-duration9-3 {  animation-duration: 9.3s; }
+.animation-duration9-4 {  animation-duration: 9.4s; }
+.animation-duration9-5 {  animation-duration: 9.5s; }
+.animation-duration9-6 {  animation-duration: 9.6s; }
+.animation-duration9-7 {  animation-duration: 9.7s; }
+.animation-duration9-8 {  animation-duration: 9.8s; }
+.animation-duration9-9 {  animation-duration: 9.9s; }
+.animation-duration10 {   animation-duration: 10s; }
+.animation-duration10-1 { animation-duration: 10.1s; }
+.animation-duration10-2 { animation-duration: 10.2s; }
+.animation-duration10-3 { animation-duration: 10.3s; }
+.animation-duration10-4 { animation-duration: 10.4s; }
+.animation-duration10-5 { animation-duration: 10.5s; }
+.animation-duration10-6 { animation-duration: 10.6s; }
+.animation-duration10-7 { animation-duration: 10.7s; }
+.animation-duration10-8 { animation-duration: 10.8s; }
+.animation-duration10-9 { animation-duration: 10.9s; }
+.animation-duration11 {   animation-duration: 11s; }
+.animation-duration11-1 { animation-duration: 11.1s; }
+.animation-duration11-2 { animation-duration: 11.2s; }
+.animation-duration11-3 { animation-duration: 11.3s; }
+.animation-duration11-4 { animation-duration: 11.4s; }
+.animation-duration11-5 { animation-duration: 11.5s; }
+.animation-duration11-6 { animation-duration: 11.6s; }
+.animation-duration11-7 { animation-duration: 11.7s; }
+.animation-duration11-8 { animation-duration: 11.8s; }
+.animation-duration11-9 { animation-duration: 11.9s; }
+.animation-duration12 {   animation-duration: 12s; }
+.animation-duration12-1 { animation-duration: 12.1s; }
+.animation-duration12-2 { animation-duration: 12.2s; }
+.animation-duration12-3 { animation-duration: 12.3s; }
+.animation-duration12-4 { animation-duration: 12.4s; }
+.animation-duration12-5 { animation-duration: 12.5s; }
+.animation-duration12-6 { animation-duration: 12.6s; }
+.animation-duration12-7 { animation-duration: 12.7s; }
+.animation-duration12-8 { animation-duration: 12.8s; }
+.animation-duration12-9 { animation-duration: 12.9s; }
+.animation-duration13 {   animation-duration: 13s; }
+.animation-duration13-1 { animation-duration: 13.1s; }
+.animation-duration13-2 { animation-duration: 13.2s; }
+.animation-duration13-3 { animation-duration: 13.3s; }
+.animation-duration13-4 { animation-duration: 13.4s; }
+.animation-duration13-5 { animation-duration: 13.5s; }
+.animation-duration13-6 { animation-duration: 13.6s; }
+.animation-duration13-7 { animation-duration: 13.7s; }
+.animation-duration13-8 { animation-duration: 13.8s; }
+.animation-duration13-9 { animation-duration: 13.9s; }
+.animation-duration14 {   animation-duration: 14s; }
+.animation-duration14-1 { animation-duration: 14.1s; }
+.animation-duration14-2 { animation-duration: 14.2s; }
+.animation-duration14-3 { animation-duration: 14.3s; }
+.animation-duration14-4 { animation-duration: 14.4s; }
+.animation-duration14-5 { animation-duration: 14.5s; }
+.animation-duration14-6 { animation-duration: 14.6s; }
+.animation-duration14-7 { animation-duration: 14.7s; }
+.animation-duration14-8 { animation-duration: 14.8s; }
+.animation-duration14-9 { animation-duration: 14.9s; }
+.animation-duration15 {   animation-duration: 15s; }

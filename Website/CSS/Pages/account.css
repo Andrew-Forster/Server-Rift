@@ -1,0 +1,306 @@
+h3 {
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+p {
+    font-weight: 100;
+}
+
+/* Settings Background */
+.settingsbg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200vh;
+    background: var(--settingsbg);
+    z-index: -1;
+}
+
+
+.content {
+    margin: 70px 0 0 0;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background: var(--settingsbg);
+    z-index: 1;
+}
+
+
+.accountImg {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 0 16px;
+    filter: drop-shadow(1px 1px 4px var(--font-color));
+}
+
+
+/* Cards */
+
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 0 0 5% 0;
+}
+
+.card {
+    background: var(--cardbg);
+    border-radius: 7px;
+    margin: 20px 20px 0 20px;
+    padding: 15px 30px 15px 30px;
+    box-shadow: 2px 2px 15px -5px var(--font-color);
+    transition-duration: 0.7s;
+}
+
+.card:hover {
+    box-shadow: 4px 4px 25px 0px var(--font-color);
+    transition-duration: 0.3s;
+    transform: translate(0, -5px);
+}
+
+.card h3 {
+    text-transform: uppercase;
+    font-weight: 500;
+    margin: 0 0 8px 0;
+
+}
+
+.card button {
+    margin: 0 0 10px 0;
+    border: 4px solid var(--btn-confirm);
+    border-radius: 7px;
+    padding: 5px 15px 5px 15px;
+    width: 100%;
+}
+
+.card button:hover {
+    background: var(--btn-confirm);
+    transition-duration: 0.4s;
+
+}
+
+/* Selections */
+input[type='checkbox'] {
+    position: absolute;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+
+}
+
+label:hover,
+label h3:hover,
+label h4,
+label p {
+    cursor: pointer;
+}
+
+/* Option Containers */
+
+.nh2 {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+/* All Card container for notifs */
+.check-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 80%;
+    margin: 20px auto 30px auto;
+    gap: 40px;
+}
+
+/* Parent for each card */
+.check-card {
+    margin: 0 20px 20px 20px;
+}
+
+.check-container .card {
+    border: 4px solid var(--cardbg);
+    margin: 0 0 0 0;
+}
+
+.check-container .card:hover {
+    border: 4px solid var(--main-color);
+}
+
+.check-card input[type='checkbox']:checked+label>.card {
+    border: 4px solid var(--btn-confirm);
+
+}
+
+.check-card input[type='checkbox']+label .switch {
+    display: inline-block;
+    width: 45px;
+    height: 22.5px;
+    border-radius: 50px;
+    background: var(--main-gradient);
+    border: 2px solid var(--utility-hover);
+    margin: 0 10px 0 15px;
+}
+
+.check-card input[type='checkbox']:checked+label .switch {
+    transition-duration: 0.3s;
+    border: 2px solid var(--btn-confirm);
+}
+
+.check-card input[type='checkbox']+label .switch>div {
+    margin: 3px 0 0 3px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50px;
+    background: var(--main-color);
+    transition-duration: 0.5s;
+}
+
+.check-card input[type='checkbox']:checked+label .switch>div {
+    margin: 3px 0 0 25px;
+    background: var(--btn-confirm);
+    transition-duration: 0.3s;
+}
+
+/* Return BTN */
+
+#return {
+    display: block;
+    margin: 15px auto 25px auto;
+    padding: 5px 0 5px 0;
+    border: 4px solid var(--btn-confirm);
+    border-radius: 5px;
+    transition-duration: 0.4s;
+    min-width: 250px;
+    width: 40%;
+}
+
+#return:hover {
+    background: var(--btn-confirm);
+    transition-duration: 0.6s;
+
+}
+
+
+/* -------- */
+/* Settings */
+/* -------- */
+
+.settings-btn-container {
+    display: flex;
+    justify-content: space-between;
+    width: 550px;
+    margin: 0 auto 20px auto;
+}
+
+#signout {
+    display: block;
+    margin: 15px auto 25px auto;
+    padding: 5px 0 5px 0;
+    border: 4px solid #ffb355;
+    border-radius: 5px;
+    transition-duration: 0.4s;
+    width: 250px;
+}
+
+#signout:hover {
+    background: #ffb355;
+    transition-duration: 0.6s;
+
+}
+
+#delete {
+    display: block;
+    margin: 15px auto 25px auto;
+    padding: 5px 0 5px 0;
+    border: 4px solid #f14f4f;
+    border-radius: 5px;
+    transition-duration: 0.4s;
+    width: 250px;
+}
+
+#delete:hover {
+    background: #f14f4f;
+    transition-duration: 0.6s;
+
+}
+
+.settings p {
+    margin: 0 0 20px 0;
+    width: 80%;
+    text-align: center;
+}
+
+
+
+/* Screen Mobile */
+@media (max-width: 750px) {
+
+
+    .card-container {
+        grid-template-columns: 1fr;
+        width: 80%;
+    }
+
+
+    .card {
+        margin: 15px auto 15px auto;
+        width: 80%;
+        max-width: 300px;
+    }
+
+
+
+    .card p {
+        margin: 0 0 20px 0;
+    }
+
+    /* Notifications */
+    .check-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        max-width: 400px;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+
+
+    /* Settings */
+
+    .settings-btn-container {
+        flex-direction: column;
+        width: 90%;
+    }
+
+}
+
+
+
+
+
+.continueAnim {
+    animation: fade 0.8s ease-in-out 0s forwards;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.active {
+    transform: translate(0px, 0px);
+    opacity: 1;
+    transition-duration: 0.7s;
+}
