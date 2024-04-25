@@ -6,6 +6,8 @@ const {
     ButtonStyle,
 } = require('discord.js');
 
+require('dotenv').config();
+
 module.exports = {
     cooldown: 0,
     data: new SlashCommandBuilder()
@@ -13,6 +15,11 @@ module.exports = {
         .setDescription('Returns a Admin Command List.'),
 
     async execute(interaction) {
+
+        if (!process.env.adminUsers.includes(interaction.user.id)) {
+            return interaction.reply('Sorry, you do not have permission to use this command.');
+        }
+
         const response = await interaction.reply({
             embeds: [mainEmbed],
             components: [mRow],
@@ -258,7 +265,7 @@ const linksEmbed = new EmbedBuilder()
     .setThumbnail('https://andrew-forster.github.io/Images/discordimg.png')
 
     .setDescription(
-        '**[Bot Invite Link](https://discord.com/oauth2/authorize?client_id=1222987237919162448&permissions=2147764288&redirect_uri=https%3A%2F%2Fandrew-forster.github.io%2Flogin&scope=bot)**' +
+        '**[Bot Invite Link](https://discord.com/oauth2/authorize?client_id=1222987237919162448&permissions=139586717761&scope=bot)**' +
         '\n\n' +
         '**[User Auth Link Login](https://discord.com/oauth2/authorize?client_id=1222987237919162448&response_type=code&redirect_uri=https%3A%2F%2Fandrew-forster.github.io%2Flogin&scope=identify+guilds.join+guilds)**' +
         '\n\n' +
