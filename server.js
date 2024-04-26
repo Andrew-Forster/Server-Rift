@@ -1,56 +1,42 @@
 const express = require('express');
+const path = require('path');
 const app = express();
-const { MongoClient, ServerApiVersion } = require("mongodb");
 const uri = "mongodb://localhost:27017";
+const mongoose = require('mongoose'); 
 
 // Models
-const User = require('./models/user');
-
-// Routes
-const userRoutes = require('./routes/users');
-const userSettings = require('./routes/user-settings');
-const { default: mongoose } = require('mongoose');
+const user = require('./src/models/user');
 
 // Database
 
-mongoose.connect(uri,{
+mongoose.connect(uri, {
     serverApi: {
-        version: ServerApiVersion.v1,
+        version: '1',
         strict: true,
         deprecationErrors: true,
-    }
+    },
+    family: 4,
 })
 .then(() => {
     console.log('Connected to database');
 })
 .catch((err) => {
-    console.log('Database connection failed', err);
+    console.log('Database connection failed: ', err);
 });
 
-app.use('/auth', userRoutes);
-app.use('/u-s', userSettings);
+// Routes
+const routes = require('./src/routes/main-router');
+app.use('/auth', routes);
 
-// app.get('/', (req, res) => {
-//     res.send('Hello World');
-// });
+app.use('',express.static(path.join(__dirname, 'public')));
+
+app.get('/', (request, response) => {
+	return response.sendFile('index.html', { root: '.' });
+});
+
 
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {
     console.log('Server is running at http://localhost:' + port);
-});
-
-app.use((err, req, res, next) => {
-  switch (err.message) {
-    case 'NoCodeProvided':
-      return res.status(400).send({
-        status: 'ERROR',
-        error: err.message,
-      });
-    default:
-      return res.status(500).send({
-        status: 'ERROR',
-        error: err.message,
-      });
-  }
 });

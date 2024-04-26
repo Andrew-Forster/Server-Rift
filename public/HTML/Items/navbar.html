@@ -19,7 +19,7 @@
 <link rel="stylesheet" type="text/css" href="/CSS/Items/navbar.css">
 
 
-<div class="alert">
+<div class="alert" aria-hidden="true">
     <div>
         <h6></h6>
         <button></button>
@@ -60,16 +60,14 @@
         </ul>
         <ul class="secondary-nav">
             <li class="snbtn onload_shift animation-delay6 onload-animation" data-odelay="1" id="login"><a
-                    href="https://discord.com/oauth2/authorize?client_id=770772228513071174&response_type=token&redirect_uri=http%3A%2F%2F127.0.0.1%3A5502%2Fauth%2Fdiscord&scope=identify+guilds+guilds.join+guilds.members.read">
+                    href="/auth/discord">
                     <button>Login</button></a></li>
             <li><a href="/HTML/Pages/account.html"><button class="smooth" title="Profile"><i class="fa-solid fa-user profile"></i></button></a></li>
-
-
-            <div id="nav-icon" onclick="openNav()">
+            <li id="nav-icon" onclick="openNav()">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </li>
         </ul>
     </div>
     <!-- Nav Icon -->
