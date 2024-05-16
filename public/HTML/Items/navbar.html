@@ -12,19 +12,13 @@
     TODO: Todo
  -->
   
-<script src="/JS/defaults.js"></script>
 <script src="https://kit.fontawesome.com/3116842acc.js" crossorigin="anonymous"></script>
 <script src="/JS/Items/navbar.js"></script>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <link rel="stylesheet" type="text/css" href="/CSS/Items/navbar.css">
 
 
-<div class="alert" aria-hidden="true">
-    <div>
-        <h6></h6>
-        <button></button>
-    </div>
-</div>
+<div class="alert" aria-hidden="true"></div>
 
 <nav class="onload_shift animation-delay5-5 onload-animation" data-odelay="0.5">
     <!-- Logo -->
@@ -46,23 +40,22 @@
     <!-- Main Navbar Navigation -->
     <div class="nav-control"> <!-- Controls mobile response-->
         <ul class="main-nav">
-            <li class="onload_shift animation-delay5-6 onload-animation" data-odelay="0.6"><a href="/index.html"><button
+            <li class="onload_shift animation-delay5-6 onload-animation" data-odelay="0.6"><a href="/home"><button
                         id="homeNavBtn">Home</button></a></li>
             <!-- <i class="fa-solid fa-house"></i> -->
 
             <li class="onload_shift animation-delay5-7 onload-animation" data-odelay="0.7"><a
-                    href="/HTML/Pages/getstarted.html"><button>Get Started</button></a></li>
+                    href="/get-started"><button>Get Started</button></a></li>
             <li class="onload_shift animation-delay5-8 onload-animation" data-odelay="0.8"><a
-                    href="/HTML/Pages/explore.html"><button>Explore</button></a></li>
+                    href="/explore"><button>Explore</button></a></li>
 
             <!-- Right hand Navigation -->
 
         </ul>
         <ul class="secondary-nav">
-            <li class="snbtn onload_shift animation-delay6 onload-animation" data-odelay="1" id="login"><a
-                    href="/auth/discord">
-                    <button>Login</button></a></li>
-            <li><a href="/HTML/Pages/account.html"><button class="smooth" title="Profile"><i class="fa-solid fa-user profile"></i></button></a></li>
+            <li class="snbtn onload_shift animation-delay6 onload-animation" data-odelay="1" id="login">
+                    <button>Login</button></li>
+            <li id="account"><a href="/account"><button class="smooth" title="Profile"><i class="fa-solid fa-user profile"></i></button></a></li>
             <li id="nav-icon" onclick="openNav()">
                 <span></span>
                 <span></span>
@@ -72,3 +65,9 @@
     </div>
     <!-- Nav Icon -->
 </nav>
+
+
+
+
+<!-- Login Checker -->
+<script src="/JS/login.js" defer></script>

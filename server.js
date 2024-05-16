@@ -3,6 +3,11 @@ const path = require('path');
 const app = express();
 const uri = "mongodb://localhost:27017";
 const mongoose = require('mongoose'); 
+const bodyParser = require('body-parser');
+
+// Middleware
+
+app.use(bodyParser.json());
 
 // Models
 const user = require('./src/models/user');
@@ -11,7 +16,7 @@ const user = require('./src/models/user');
 
 mongoose.connect(uri, {
     serverApi: {
-        version: '1',
+        version: '1', 
         strict: true,
         deprecationErrors: true,
     },
@@ -26,9 +31,9 @@ mongoose.connect(uri, {
 
 // Routes
 const routes = require('./src/routes/main-router');
-app.use('/auth', routes);
+app.use('/', routes);
 
-app.use('',express.static(path.join(__dirname, 'public')));
+app.use('', express.static(path.join(__dirname, 'public')));
 
 app.get('/', (request, response) => {
 	return response.sendFile('index.html', { root: '.' });

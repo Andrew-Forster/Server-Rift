@@ -380,8 +380,11 @@ nav:has(.navpopup.open) {
     font-size: 50px;
 }
 
-/*  */
+/* Disable Element */
 
+.disable {
+    display: none !important;
+}
 
 
 /* Alert */

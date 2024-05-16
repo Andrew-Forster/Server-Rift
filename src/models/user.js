@@ -9,6 +9,8 @@ const userSchema = new mongoose.Schema({
     settings: {
         weeklyRift: { type: Boolean, default: true },
         randomRift: { type: Boolean, default: true },
+        joinNotif: { type: Boolean, default: true },
+        updateNotif: { type: Boolean, default: false },
         serverInterests: { type: Array, default: [] }
     },
     session: { type: String, required: true }, // Identifier for the user for backend processes
@@ -17,4 +19,4 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
-module.exports = User;
+module.exports = User; 

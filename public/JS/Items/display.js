@@ -23,15 +23,15 @@ document.addEventListener('click', function (event) {
             event.clientX > dialogDimensions.right ||
             event.clientY < dialogDimensions.top ||
             event.clientY > dialogDimensions.bottom
-          ) {
+        ) {
             themeClose();
-          }
+        }
         if (event.target === changeTheme && !themeDialog.open) {
             toggleTheme();
         }
     } catch (e) {}
-        
-    });
+
+});
 
 document.addEventListener('scroll', themeClose);
 
@@ -48,8 +48,7 @@ function themeClose() {
         if (themeDialog.open) {
             themeDialog.close();
         }
-    }
-    catch (e) {}
+    } catch (e) {}
 }
 
 
@@ -118,12 +117,12 @@ function darkTheme() {
 
 function lightTheme(isDefault) {
     themeChoice = "themeNeonLight";
-    
+
     if (isDefault && localStorage.getItem("alertDC") != 1) {
         sendAlert("Dark Mode is Recommended", "Lets Switch!", "theme", false)
         localStorage.setItem("alertDC", 1);
     }
-    
+
     if (lightThemeButton != null) {
         lightThemeButton.classList.add("active");
     }
@@ -173,7 +172,7 @@ function skyLineTheme() {
     document.documentElement.style.setProperty("--main-gradient", "linear-gradient(to top right, #38639b, #323536)");
     document.documentElement.style.setProperty("--page-gradient", "rgba(28, 28, 28, 0.75)");
     document.documentElement.style.setProperty("--footer-color", "#4C476B");
-    
+
     document.documentElement.style.setProperty("--btn-color", "#ffffff");
     document.documentElement.style.setProperty("--second-btn-color", "#38639b");
     document.documentElement.style.setProperty("--font-color", "#ffffff");
@@ -193,7 +192,7 @@ function setSystemTheme() {
     }
 }
 
-let alertDarkBtn = document.querySelector(".alert-dark button");
+let alertDarkBtn = document.querySelector(".alert button");
 if (alertDarkBtn != null) {
     alertDarkBtn.addEventListener("click", function () {
         alertDark.classList.remove("active");
@@ -209,14 +208,19 @@ if (alertDarkBtn != null) {
 
 // Alerts
 
-
-
+// TODO: Add alert to document dynamically
 async function sendAlert(head, btn, action, perm, delay) {
     var alertPop = await waitForElm(".alert");
+    alertPop.innerHTML = `      
+    <div>
+        <h6></h6>
+        <button></button>
+    </div>
+    `;
     var alertHead = await waitForElm(".alert div h6");
     var alertBtn = await waitForElm(".alert div button");
     // var alertBtn = await waitForElm(".alert button");
-    
+
     alertHead.innerText = `${head}`;
     alertBtn.innerText = `${btn}`;
 
@@ -233,7 +237,11 @@ async function sendAlert(head, btn, action, perm, delay) {
     }
 
 
-    alertBtn.addEventListener('click', function() {
+    alertBtn.removeEventListener('click', alertEvents);
+
+    alertBtn.addEventListener('click', alertEvents);
+
+    function alertEvents() {
         switch (action) {
             case "theme":
                 for (let j = 0; j < themeChildren.length; j++) {
@@ -257,30 +265,13 @@ async function sendAlert(head, btn, action, perm, delay) {
                 alertPop.classList.remove('perm');
                 break;
             
+            case "saveInts":
+                alertPop.classList.remove('perm');
+                // Located in account.js, this function saves user interests
+                setInterests();
+                break;
+
         };
         alertPop.classList.remove('active');
-    });
-}
-
-
-// Mutation Observer
-
-function waitForElm(selector) {
-    return new Promise(resolve => {
-        if (document.querySelector(selector)) {
-            return resolve(document.querySelector(selector));
-        }
-
-        const observer = new MutationObserver(mutations => {
-            if (document.querySelector(selector)) {
-                observer.disconnect();
-                resolve(document.querySelector(selector));
-            }
-        });
-
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true
-        });
-    });
+    }
 }

@@ -1,7 +1,4 @@
-* {
-    /* For Checkboxes */
-    box-sizing: border-box;
-}
+
  
 .bg {
     width: 100%;
@@ -41,11 +38,6 @@ body, .content {
         width: 97%;
     }
 
-    .step1 .interests {
-    grid-template-columns: repeat(2, 1fr);
-
-    }
-
     .content {
         height: 110%;
     }
@@ -72,116 +64,7 @@ body, .content {
 /* STEP 1 Section */
 /* -------------- */
 
-
-.interests {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    white-space: nowrap;
-}
-
-/* Interest boxes */
-.content label {
-    min-width: 166px;
-    margin: 25px 20px 0 25px;
-    padding: 10px 20px 10px 20px;
-    border-radius: 5px;
-    border: 4px solid var(--main-color);
-    /* color: var(--font-color); */
-    transition-duration: 0.5s;
-    cursor: pointer;
-}
-
-/* On hover */
-label:hover {
-    background: var(--main-color);
-    color: var(--font-color);
-    cursor: pointer;
-}
-
-/* CUSTOM CHECKBOX */
-input[type='checkbox'] {
-    position: absolute;
-    width: 0;
-    height: 0;
-    pointer-events: none;
-
-}
-
-.content input[type='checkbox']:checked+label {
-    border: 4px solid var(--btn-confirm);
-}
-
-input[type='checkbox']+label>span {
-    position: relative;
-    color: #9e9e9e;
-    transition: color 250ms cubic-bezier(.4, 0, .23, 1);
-    margin: 10px 0 0 12px;
-    float: right;
-    vertical-align: middle;
-    white-space: nowrap;
-    display: inline;
-}
-
-
-/* Styles for the inner span that will act as the custom checkbox appearance */
-input[type='checkbox']+label>span>span {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 20px;
-    height: 20px;
-    background: transparent;
-    border: 2px solid #9E9E9E;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: all 250ms cubic-bezier(.4, 0, .23, 1);
-    /* overflow: hidden; */
-
-
-}
-
-input[type='checkbox']:hover+label>span>span {
-    background: 2px solid var(--btn-confirm);
-}
-
-input[type='checkbox']:checked+label>span>span {
-    border: 10px solid var(--btn-confirm);
-}
-
-/* Adjusted selector for when the checkbox is checked */
-input[type='checkbox']:checked+label>span>span:before {
-    content: "";
-    position: absolute;
-    top: 8px;
-    left: 2px;
-    border-right: 3px solid transparent;
-    border-bottom: 3px solid transparent;
-    transform: rotate(45deg);
-    transform-origin: 0% 100%;
-    animation: checkbox-check 125ms 250ms cubic-bezier(.4, 0, .23, 1) forwards;
-}
-
-@keyframes checkbox-check {
-    0% {
-        width: 0;
-        height: 0;
-        border-color: var(--font-color);
-        transform: translate3d(0, 0, 0) rotate(45deg);
-    }
-
-    33% {
-        width: 5px;
-        height: 0;
-        transform: translate3d(0, 0, 0) rotate(45deg);
-    }
-
-    100% {
-        width: 5px;
-        height: 14px;
-        border-color: var(--font-color);
-        transform: translate3d(0, -14px, 0) rotate(45deg);
-    }
-}
+/* Checkboxes located in utils.css */
 
 
 .s1endblock, .s2endblock, .s3block {

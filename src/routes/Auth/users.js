@@ -1,14 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../../models/user');
+const { model } = require('mongoose');
 
 
 const redirect = encodeURIComponent("http://localhost:3000/auth/discord/callback")
 
 // Return a Specific User
+// POST request to /auth/user
 
-router.post('/getUser', async (req, res) => {
+router.post('/user', async (req, res) => {
   try {
+    // console.log(req.body);
     const {
       session
     } = req.body;
@@ -16,21 +19,26 @@ router.post('/getUser', async (req, res) => {
       session
     });
 
+    // console.log(user);
+
     if (!user) {
+      console.log('User was not found, please log in again.');
       res.status(404).json({
         error: 'User Not Found'
       });
+      return;
     }
 
-    let results = await fetch(`https://discordapp.com/api/user/@me`, {
+    let results = await fetch(`https://discordapp.com/api/users/@me`, {
       headers: {
         Authorization: `Bearer ${user.discordAccess}`
       }
     });
 
     if (results.status === 401) {
+      console.log('Token Expired');
       const updatedUser = await refreshToken(user);
-      results = await fetch(`https://discordapp.com/api/user/@me`, {
+      results = await fetch(`https://discordapp.com/api/users/@me`, {
         headers: {
           Authorization: `Bearer ${updatedUser.discordAccess}`
         }
@@ -38,13 +46,13 @@ router.post('/getUser', async (req, res) => {
     }
 
 
-
     res.status(200).json({
-      results
+      results: await results.json()
     });
 
   } catch (err) {
     res.status(500).send('Internal Server Error');
+    console.error(err);
   }
 });
 
@@ -80,3 +88,8 @@ function refreshToken(user) {
     }
   });
 }
+
+
+
+
+module.exports = router;

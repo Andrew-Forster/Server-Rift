@@ -1,28 +1,45 @@
 /* Variable Colors */
 :root {
     /* HOVERS */
-    --nav-hover: linear-gradient(90deg, rgba(137, 188, 255, 0.9) 0%, rgba(44, 102, 227, 0.9) 100%); /* For Navigation on hover color */
-    --utility-hover: #aaaaaa; /* Used for hovering on anchor tags */
-    
+    --nav-hover: linear-gradient(90deg, rgba(137, 188, 255, 0.9) 0%, rgba(44, 102, 227, 0.9) 100%);
+    /* For Navigation on hover color */
+    --utility-hover: #aaaaaa;
+    /* Used for hovering on anchor tags */
+
     /* Main */
     --main-color: rgba(40, 109, 198, 0.803);
-    --main-shadow: rgba(255, 255, 255, 0.80); /* Used for card shadows */
-    --step1-color: linear-gradient(205deg, rgba(80, 80, 80, 0.05) 60%, rgba(56, 44, 227, 0.4) 100%); /* Card Color */
-    --step2-color: linear-gradient(205deg, rgba(80, 80, 80, 0.05) 60%, rgba(44,102,227,0.4) 100%); /* Card Color */
-    --step3-color: linear-gradient(205deg, rgba(80, 80, 80, 0.05) 60%, rgba(44, 181, 227, 0.4) 100%); /* Card Color */
-    --steps-end-color: #252e3f; /* Steps End Section */
-    --main-gradient: linear-gradient(108deg, rgba(4,44,96,1) 0%, rgba(13,28,61,1) 14%, rgba(13,20,46,1) 45%, rgba(13,13,33,1) 79%); /* Main BG color */
-    --page-gradient:  rgba(28, 28, 28, 0.75); /* Darkens mobile nav */
-    --footer-color: rgb(25, 32, 40); /* Footer color */
+    --main-shadow: rgba(255, 255, 255, 0.80);
+    /* Used for card shadows */
+    --step1-color: linear-gradient(205deg, rgba(80, 80, 80, 0.05) 60%, rgba(56, 44, 227, 0.4) 100%);
+    /* Card Color */
+    --step2-color: linear-gradient(205deg, rgba(80, 80, 80, 0.05) 60%, rgba(44, 102, 227, 0.4) 100%);
+    /* Card Color */
+    --step3-color: linear-gradient(205deg, rgba(80, 80, 80, 0.05) 60%, rgba(44, 181, 227, 0.4) 100%);
+    /* Card Color */
+    --steps-end-color: #252e3f;
+    /* Steps End Section */
+    --main-gradient: linear-gradient(108deg, rgba(4, 44, 96, 1) 0%, rgba(13, 28, 61, 1) 14%, rgba(13, 20, 46, 1) 45%, rgba(13, 13, 33, 1) 79%);
+    /* Main BG color */
+    --page-gradient: rgba(28, 28, 28, 0.75);
+    /* Darkens mobile nav */
+    --footer-color: rgb(25, 32, 40);
+    /* Footer color */
 
-    
-    --btn-color: #ffffff; /* For all button colors */
-    --second-btn-color: #1e385a; /* Secondary btn colors */
-    --font-color: #ffffff; /* For all font colors  */
-    --font-opposite: #000000; /* For all font colors  */
-    --discord: #7289DA; /* Discord color */
-    --settingsbg: #2F2C42; /* Settings Background */
-    --cardbg: rgb(25, 32, 40); /* Card Background */
+
+    --btn-color: #ffffff;
+    /* For all button colors */
+    --second-btn-color: #1e385a;
+    /* Secondary btn colors */
+    --font-color: #ffffff;
+    /* For all font colors  */
+    --font-opposite: #000000;
+    /* For all font colors  */
+    --discord: #7289DA;
+    /* Discord color */
+    --settingsbg: rgb(39, 38, 44);
+    /* Settings Background */
+    --cardbg: rgb(25, 32, 40);
+    /* Card Background */
 
 }
 
@@ -32,13 +49,21 @@
     font-family: Teko;
     src: url(/Fonts/Teko/Teko-VariableFont_wght.ttf);
 }
+
 @font-face {
     font-family: LTS;
     src: url(/Fonts/LT\ Sonoma\ 2.otf);
 }
 
 html {
-  font-size: 62.5%;
+    font-size: 62.5%;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+body {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
 }
 
 .logo {
@@ -175,6 +200,7 @@ a {
     user-select: none;
     color: var(--font-color);
 }
+
 button {
     /* property: value */
     font-family: Teko, Helvetica, sans-serif;
@@ -206,27 +232,35 @@ select {
     h1 {
         font-size: 5rem;
     }
+
     h2 {
         font-size: 4.2rem;
     }
+
     h3 {
         font-size: 3.4rem;
     }
+
     h4 {
         font-size: 2.6rem;
     }
+
     h5 {
         font-size: 2.2rem;
     }
+
     h6 {
         font-size: 1.8rem;
     }
+
     p {
         font-size: 2.2rem;
     }
+
     li {
         font-size: 2.2rem;
     }
+
     div {
         font-size: 2.2rem;
     }
@@ -234,5 +268,5 @@ select {
     button {
         font-size: 2.2rem;
     }
-    
+
 }

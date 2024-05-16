@@ -24,7 +24,10 @@ router.get('/discord', (req, res) => {
 
 
 router.get('/discord/callback', catchAsync(async (req, res) => {
-  if (!req.query.code) throw new Error('No Code Provided');
+  if (!req.query.code) {
+    res.redirect('/'); // Redirect to home page if no code is found
+    return;
+  }
 
   // Get the code from the query
   const code = req.query.code;
@@ -37,12 +40,14 @@ router.get('/discord/callback', catchAsync(async (req, res) => {
     },
     body: `grant_type=authorization_code&code=${code}&redirect_uri=${redirect}`
   });
+  
   const {
     access_token,
     refresh_token,
     expires_in
   } = await response.json();
 
+  
   // Search for the user in the database if they exist, if not create a new user
   const user = await User.findOne({
     discordRefresh: refresh_token
@@ -52,13 +57,12 @@ router.get('/discord/callback', catchAsync(async (req, res) => {
   let session; // Create a session variable for new users
 
   if (user) {
-    console.log('Updating user');
     // Update the access token
     user.discordAccess = access_token;
     user.date = Date.now() - (expires_in * 1000);
-    user.save();
+    await user.save();
+    session = user.session;
   } else {
-    console.log('Creating a new user');
     // Create a new user
     const newUser = new User({
       discordAccess: access_token,
@@ -74,7 +78,7 @@ router.get('/discord/callback', catchAsync(async (req, res) => {
   const queryPage = req.query.page;
 
   if (queryPage) {
-    res.redirect(`/${queryPage}?session=${user.session}`); // Redirect and append Query String
+    res.redirect(`/${queryPage}?session=${session}`); // Redirect and append Query String
   } else {
     res.redirect(`/?session=${session}`);
   }

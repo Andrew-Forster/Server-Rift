@@ -238,6 +238,17 @@ label p {
 }
 
 
+/* Interests section */
+
+.interests {
+    margin-bottom: 3rem;
+}
+
+
+
+
+
+
 
 /* Screen Mobile */
 @media (max-width: 750px) {
