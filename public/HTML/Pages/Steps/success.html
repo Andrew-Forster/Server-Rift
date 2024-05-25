@@ -1,0 +1,98 @@
+
+<!-- Andrew Forster
+   - Project Date
+   - Project
+   - Sources:
+   + 
+   + 
+ 
+   Better Comments Extension
+    ! Important
+    * Highlight
+    ? Question
+    TODO: Todo
+ -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+ 
+ <head>
+     <meta charset="UTF-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Welcome to Server Rift</title>
+     <link rel="icon" type="/image/jpg" href="Images/logo.png">
+ 
+ 
+     <!-- JQUERY LINKING -->
+     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+ 
+ 
+ 
+     <!--*----------------------------->
+     <!--* SCRIPTS & OTHER LIBRARIES -->
+     <!--*----------------------------->
+     <!-- Icons -->
+     <script src="https://kit.fontawesome.com/3116842acc.js" crossorigin="anonymous"></script>
+ 
+     <!-- Scroll Animations -->
+     <link rel="stylesheet" type="text/css"
+         href="https://cdn.jsdelivr.net/gh/sup3r0001/Scroll-Animator@1.0.0/Scroll%20Animator/scrollanimator.css">
+     <script src="https://cdn.jsdelivr.net/gh/sup3r0001/Scroll-Animator@1.0.0/Scroll%20Animator/scrollanimator.js">
+     </script>
+ 
+     <!-- Themes & Popups -->
+     <script src="/JS/Items/display.js"></script>
+     <!--*------------------------------------>
+     <!--* END OF SCRIPTS & OTHER LIBRARIES -->
+     <!--*------------------------------------>
+ 
+ 
+ 
+     <!--*---------------------->
+     <!--* CSS PAGE LINKING'S -->
+     <!--*---------------------->
+ 
+     <link rel="stylesheet" type="text/css" href="/CSS/styles.css"/>
+     <link rel="stylesheet" type="text/css" href="/CSS/Pages/getstarted.css"/>
+     <!-- <link rel="stylesheet" type="text/css" href="/CSS/utils.css"/> -->
+ 
+     <!--*------------------------>
+     <!--* End of CSS LINKING'S -->
+     <!--*------------------------>
+ 
+     <script src="/JS/utils.js"></script>
+     <script src="/JS/Pages/getstarted.js" defer></script>
+ 
+     <!-- Navbar -->
+     <div id="nav-placeholder"></div>
+ </head>
+ 
+ <body>
+     <div id="content" class="content">
+        <section class="final">
+            <h2>Success</h2>
+            <div class="endBlock">
+                <a href="https://discord.com/channels/@me"><button class="returnBtn">Return to Discord</button></a>
+                <h3>OR</h3>
+                <a href="/account"><button class="profileBtn">View Your Profile</button></a>
+            </div>
+        </section>
+     </div>
+ 
+ </body>
+ 
+ </html>
+ 
+ <!-- Navbar JS Code -->
+ <script>
+     $(function () {
+         $("#nav-placeholder").load("/HTML/Items/navbar.html",
+             function () {
+                 $(".main-nav li button:contains('Get Started')").addClass("active");
+             });
+     });
+ </script>
+ 
+ 
+ 
+ <div class="bg"></div>

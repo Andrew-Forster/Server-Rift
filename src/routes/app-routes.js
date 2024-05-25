@@ -37,6 +37,10 @@ router.get('/home', (req, res) => {
     res.sendFile('index.html', { root: './public' });
 });
 
+router.get('/success', (req, res) => {
+    res.sendFile('HTML/Pages/Steps/success.html', { root: './public' });
+});
+
 
 
 

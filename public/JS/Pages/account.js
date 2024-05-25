@@ -139,6 +139,17 @@ async function awaitContentReplace(page) {
             break;
 
         case settings:
+            let signoutBtn = await waitForElm("#signout");
+            let disableAcct = await waitForElm("#disable");
+
+            signoutBtn.addEventListener("click", function () {
+                signOut();
+            });
+
+            disableAcct.addEventListener("click", function () {
+                sendAlert("Are you sure you want to disable your account?", "Disable Account", "disableAccount", true, 0);
+            });
+
             returnBtn.addEventListener("click", function () {
                 contentReplace(asMain);
             });
@@ -151,6 +162,11 @@ async function awaitContentReplace(page) {
             break;
     }
 
+}
+
+function signOut() {
+    localStorage.removeItem('session');
+    window.location.href = "/";
 }
 
 // TODO: Convert to switch function
@@ -229,7 +245,7 @@ function addIntEvents() {
     checkboxes.forEach(function (checkbox) {
         checkbox.addEventListener("change", async function () {
             let savedSettings = await getUserSettings();
-            if (checkAllInterestsOriginalState(savedSettings, checkboxes)){
+            if (checkAllInterestsOriginalState(savedSettings, checkboxes)) {
                 sendAlert("Please confirm to save your changes", "Confirm Save", "saveInts", true, 0);
             } else {
                 alertPop.classList.remove('perm');
@@ -371,7 +387,7 @@ async function setSettings() {
         savedSettings[checkbox.id] = checkbox.checked;
     });
 
-    // TODO: Connect with backend to save settings
+    // TODO: Add handling on backend for saving settings that do not exist
 
     try {
         // Located in utils.js

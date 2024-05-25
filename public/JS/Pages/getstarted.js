@@ -4,17 +4,55 @@ const content = document.getElementById("content");
 const step1Content = "/HTML/Pages/Steps/step1.html";
 const step2Content = "/HTML/Pages/Steps/step2.html";
 const step3Content = "/HTML/Pages/Steps/step3.html";
-const finalContent = "/HTML/Pages/Steps/final.html";
+const successContent = "/HTML/Pages/Steps/final.html";
+const errorContent = "/HTML/Pages/Steps/error.html";
 let currentStep = 1;
+
+
+// Check user if logged in and update user preferences & settings
+
+console.log(localStorage.getItem("form2"));
+
+
+if (checkLoggedIn() && window.location.href.includes('success')) {
+
+    let interests = JSON.parse(localStorage.getItem("form1"));
+    let settings = JSON.parse(localStorage.getItem("form2"));
+
+    if (interests && settings) {
+        let newInterests = [];
+
+        Object.keys(interests).forEach(function (key) {
+            if (interests[key] === true) {
+                newInterests.push(key);
+            }
+        });
+        updateUserSettings(settings);
+        updateInterests(newInterests);
+    }
+} else if (checkLoggedIn()) {
+    window.location.href = "/account";
+}
+
+
+
+
+
+
+
 
 // Step 1
 
 //TODO: Make it so on the randoms server rift, when the combo box is changed, it enables the switch
+if (!window.location.href.includes('success')) {
+    step1.addEventListener("click", function () {
+        contentReplace(step2Content);
+        formLoad(2);
+    });
+} else {
+    content.children[0].classList.add("active");
+}
 
-step1.addEventListener("click", function () {
-    contentReplace(step2Content);
-    formLoad(2);
-});
 
 
 function contentReplace(step) {
@@ -55,7 +93,8 @@ function contentReplace(step) {
             try {
                 const step3 = document.querySelector(".s3login");
                 step3.addEventListener("click", function () {
-                    contentReplace(finalContent);
+                    localStorage.setItem("loginLocation", "new");
+                    window.location.href = "/auth/discord";
                 });
             } catch (e) {
                 location.reload();

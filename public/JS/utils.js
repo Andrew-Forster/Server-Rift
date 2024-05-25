@@ -203,3 +203,78 @@ function removeQueryString(string) {
     url.searchParams.delete(string);
     window.history.pushState({}, '', url);
 }
+
+
+
+
+
+
+// Alerts
+
+// TODO: Make alert look better in CSS files
+async function sendAlert(head, btn, action, perm, delay) {
+    var alertPop = await waitForElm(".alert");
+    alertPop.innerHTML = `      
+    <div>
+        <h6></h6>
+        <button></button>
+    </div>
+    `;
+    var alertHead = await waitForElm(".alert div h6");
+    var alertBtn = await waitForElm(".alert div button");
+    // var alertBtn = await waitForElm(".alert button");
+
+    alertHead.innerText = `${head}`;
+    alertBtn.innerText = `${btn}`;
+
+    // Set the delay
+    if (!isNaN(parseInt(delay))) {
+        alertPop.style.animationDelay = `${delay}s`;
+    }
+
+    // Set the alert type
+    if (perm == true) {
+        alertPop.classList.add('perm');
+    } else {
+        alertPop.classList.add('active');
+    }
+
+
+    alertBtn.removeEventListener('click', alertEvents);
+
+    alertBtn.addEventListener('click', alertEvents);
+
+    function alertEvents() {
+        switch (action) {
+            case "theme":
+                for (let j = 0; j < themeChildren.length; j++) {
+                    themeChildren[j].classList.remove("active");
+                }
+                darkTheme();
+                navShowHide();
+                alertPop.classList.remove("active");
+                localStorage.setItem("theme", "themeNeonDark");
+                break;
+            case "nav":
+                break;
+
+            case "saveChanges":
+                alertPop.classList.remove("perm");
+                // Located in account.js, this function saves the settings
+                setSettings();
+
+            case "closeAlert":
+                alertPop.classList.remove('active');
+                alertPop.classList.remove('perm');
+                break;
+            
+            case "saveInts":
+                alertPop.classList.remove('perm');
+                // Located in account.js, this function saves user interests
+                setInterests();
+                break;
+
+        };
+        alertPop.classList.remove('active');
+    }
+}

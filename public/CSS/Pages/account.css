@@ -215,7 +215,7 @@ label p {
 
 }
 
-#delete {
+#disable {
     display: block;
     margin: 15px auto 25px auto;
     padding: 5px 0 5px 0;
@@ -225,7 +225,7 @@ label p {
     width: 250px;
 }
 
-#delete:hover {
+#disable:hover {
     background: #f14f4f;
     transition-duration: 0.6s;
 

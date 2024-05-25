@@ -48,6 +48,7 @@ router.post('/user/settings', async (req, res) => {
       }
       // update user in DB
       user.settings = settings;
+      
       await user.save();
       res.status(200).json({
         settings
