@@ -6,6 +6,11 @@ const {
     ButtonStyle,
 } = require('discord.js');
 
+const mongoose = require('mongoose');
+const User = require('../../../src/models/user'); // Import your User model
+const dbConnection = require('../../../server.js'); // Import the exported connection from server.js
+
+
 module.exports = {
     aliases: ['h'],
     cooldown: 5,
@@ -26,7 +31,115 @@ module.exports = {
             time: 60_000
         });
 
-        confirmation.on('collect', interaction => {
+        confirmation.on('collect', async interaction => {
+            let userID = interaction.user.id;
+
+            let user = await User.findOne({
+                discordId: userID
+            });
+
+            const profileEmbed = {
+                color: 0x042d62,
+                title: '**Server Rift | Profile**',
+                url: 'https://andrew-forster.github.io/',
+                author: {
+                    name: `${interaction.user.username}'s Profile`,
+                    icon_url: interaction.user.displayAvatarURL(),
+                },
+                description: 
+                    `> **Servers Joined**: \`${user.stats.serversJoined}\` \n` +
+                    `> \n` +
+                    `> **Rift Activity Level**: \`${user.stats.activityLevel}\` \n` +
+                    `> \n` +
+                    `> **Activity Rank**: \`${user.stats.activityRank}\` \n` +
+                    `> \n` +
+                    `> **Servers Left**: \`${user.stats.serversLeft}\`\n\n`,
+                thumbnail: {
+                    url: 'https://andrew-forster.github.io/Images/discordimg.png',
+                },
+                footer: {
+                    text: 'Server Rift',
+                    icon_url: 'https://andrew-forster.github.io/Images/logofull.png',
+                },
+                timestamp: new Date().toISOString(),
+            };
+            
+            const prefsEmbed = {
+                color: 0x042d62,
+                title: '**Server Rift | Preferences**',
+                url: 'https://andrew-forster.github.io/',
+                author: {
+                    name: `${interaction.user.username}'s Preferences`,
+                    icon_url: interaction.user.displayAvatarURL(),
+                },
+                description: 
+                `**Weekly Server Rift**: ${user.settings.weeklyRift ? '✅' : '❌'} \n\n` +
+                `**Random Server Rift**: ${user.settings.randomRift ? '✅' : '❌'} \n\n` +
+                `**Join Notifications**: ${user.settings.joinNotif ? '✅' : '❌'} \n\n` +
+                `**Update Notifications**: ${user.settings.updateNotif ? '✅' : '❌'} \n\n` +
+                `**Server Interests**:\n` +
+                user.settings.serverInterests.map(interest => `> ${interest}`).join('\n') + '\n\n' +
+                '`Edit your preferences by clicking the button below!`',
+                thumbnail: {
+                    url: 'https://andrew-forster.github.io/Images/discordimg.png',
+                },
+                footer: {
+                    text: 'Server Rift',
+                    icon_url: 'https://andrew-forster.github.io/Images/logofull.png',
+                },
+                timestamp: new Date().toISOString(),
+            };
+
+            const qEmbed = {
+                color: 0x042d62,
+                title: '**Server Rift | Commonly Asked Questions**',
+                url: 'https://andrew-forster.github.io/',
+                description:
+                    '> **Will I be added to servers more than once?**\n' +
+                    '`No, you will only ever be added to a server once.`\n\n' +
+                    '> **What if I don\'t like the servers I\'m added to?**\n' +
+                    '`You are always free to leave, you can also change your preferences if you decide you don\'t like a niche.`\n\n' +
+                    '> **What if I don\'t want to be added to servers anymore?**\n' +
+                    '`You can opt out of being added to server by heading to our website.`\n\n' +
+                    '> **How can I change my preferences?**\n' +
+                    '`Head over to our website by using the button below and going to your profile!`',
+                thumbnail: {
+                    url: 'https://andrew-forster.github.io/Images/discordimg.png',
+                },
+                footer: {
+                    text: 'Server Rift',
+                    icon_url: 'https://andrew-forster.github.io/Images/logofull.png',
+                },
+                timestamp: new Date().toISOString(),
+            };
+            // TODO: Change to recently joined servers
+            const manageEmbed = {
+                color: 0x042d62,
+                title: '**Server Rift | Server Manager**',
+                url: 'https://andrew-forster.github.io/',
+                author: {
+                    name: 'Server Settings',
+                    icon_url: interaction.user.displayAvatarURL(),
+                },
+                description: 
+                    `# **Server Settings**\n\n` +
+                    `> **Prefix**: \`.\`\n\n` +
+                    `# **Server Commands**\n\n` +
+                    `> **View Stats** (\`stats\`) - View server rift stats like joins, leaves, etc.\n` +
+                    `> \n` +
+                    `> **Ads** (\`ads\`) - Learn more about Server Rift Ads.\n` +
+                    `> \n` +
+                    `> **Niche** (\`niche\`) - Set/Request a server niche.\n\n`,
+                thumbnail: {
+                    url: 'https://andrew-forster.github.io/Images/discordimg.png',
+                },
+                footer: {
+                    text: 'Server Rift',
+                    icon_url: 'https://andrew-forster.github.io/Images/logofull.png',
+                },
+                timestamp: new Date().toISOString(),
+            };
+            
 
             switch (interaction.customId) {
                 case 'home':
@@ -36,12 +149,26 @@ module.exports = {
                     });
                     break;
                 case 'profile':
+                    if (!user) {
+                        interaction.update({
+                            embeds: [createEmbed],
+                            components: [btnManager('profile')]
+                        });
+                        break;
+                    }
                     interaction.update({
                         embeds: [profileEmbed],
                         components: [btnManager('profile')]
                     });
                     break;
                 case 'prefs':
+                    if (!user) {
+                        interaction.update({
+                            embeds: [createEmbed],
+                            components: [btnManager('prefs')]
+                        });
+                        break;
+                    }
                     interaction.update({
                         embeds: [prefsEmbed],
                         components: [btnManager('prefs')]
@@ -66,10 +193,13 @@ module.exports = {
                     });
                     break;
             }
+            
         });
         try {
             confirmation.on('end', () => {
-                interaction.editReply({ components: [] });
+                interaction.editReply({
+                    components: []
+                });
             });
         } catch (error) {}
     },
@@ -116,6 +246,22 @@ const mainEmbed = new EmbedBuilder()
     })
     .setTimestamp();
 
+    const createEmbed = {
+        color: 0x042d62,
+        title: '**Server Rift | Account Not Found!**',
+        url: 'https://andrew-forster.github.io/',
+        description: 
+            `**Your discord account was not found in our database**\n\n` +
+            `> \`Please create an account by clicking the button below!\`\n\n`,
+        thumbnail: {
+            url: 'https://andrew-forster.github.io/Images/discordimg.png',
+        },
+        footer: {
+            text: 'Server Rift',
+            icon_url: 'https://andrew-forster.github.io/Images/logofull.png',
+        },
+        timestamp: new Date().toISOString(),
+    };
 
 const home = new ButtonBuilder()
     .setCustomId('home')
@@ -143,7 +289,7 @@ const manage = new ButtonBuilder()
     .setStyle(ButtonStyle.Secondary);
 
 const link = new ButtonBuilder()
-    .setLabel('Edit Rift Preferences')
+    .setLabel('Manage Account')
     .setStyle(ButtonStyle.Link)
     .setURL('https://andrew-forster.github.io/');
 
@@ -158,9 +304,9 @@ const mRow = new ActionRowBuilder()
     );
 
 
-    var componentsArr;
-    
-    function btnManager(page) {
+var componentsArr;
+
+function btnManager(page) {
     let oRow = new ActionRowBuilder()
     componentsArr = [profile, prefs, questions, manage, link];
     switch (page) {
@@ -189,140 +335,3 @@ const mRow = new ActionRowBuilder()
     oRow.addComponents(componentsArr);
     return oRow;
 }
-
-//------------
-// Profile Res
-//------------
-
-const profileEmbed = new EmbedBuilder()
-    .setColor('#042d62')
-    .setTitle('**Server Rift | Profile**')
-    .setURL('https://andrew-forster.github.io/')
-    .setThumbnail('https://andrew-forster.github.io/Images/discordimg.png')
-
-    .setDescription(
-        '# **(name)\'s Profile**' +
-        '\n\n' +
-        '> **Servers Joined**: `22` ' +
-        ' \n' +
-        '> \n' +
-        '> **Rift Activity Level**: `5` ' +
-        ' \n' +
-        '> \n' +
-        '> **Activity Rank**: `4` ' +
-        ' \n' +
-        '> \n' +
-        '> **Servers Left**: `4` ' +
-        '\n\n'
-
-    )
-
-    .setFooter({
-        text: 'Server Rift',
-        iconURL: 'https://andrew-forster.github.io/Images/logofull.png'
-    })
-    .setTimestamp();
-
-//-------------
-// Settings Res
-//-------------
-
-const prefsEmbed = new EmbedBuilder()
-    .setColor('#042d62')
-    .setTitle('**Server Rift | Preferences**')
-    .setURL('https://andrew-forster.github.io/')
-    .setThumbnail('https://andrew-forster.github.io/Images/discordimg.png')
-
-    .setDescription(
-        '# **(name)\'s Preferences**' +
-        '\n\n' +
-        '**Weekly Server Rift**: ✅ ' +
-        ' \n' +
-        '\n' +
-        '**Random Server Rift**: ✅ ' +
-        ' \n' +
-        '\n' +
-        '**Server Interests**:\n' +
-        '> Minecraft\n' +
-        '> Minecraft\n' +
-        '> Minecraft\n' +
-        '> Minecraft\n' +
-        '> Minecraft\n' +
-        '\n ' +
-        '`Edit your preferences by clicking the button below!`'
-
-    )
-
-    .setFooter({
-        text: 'Server Rift',
-        iconURL: 'https://andrew-forster.github.io/Images/logofull.png'
-    })
-    .setTimestamp();
-
-//--------------
-// Questions Res
-//--------------
-
-const qEmbed = new EmbedBuilder()
-    .setColor('#042d62')
-    .setTitle('**Server Rift | Commonly Asked Questions**')
-    .setURL('https://andrew-forster.github.io/')
-    .setThumbnail('https://andrew-forster.github.io/Images/discordimg.png')
-
-    .setDescription(
-        '> **Will I be added to servers more than once?**' +
-        '\n `No, you will only ever be added to a server once.`' +
-        '\n\n' +
-        '> **What if I don\'t like the servers I\'m added to? **' +
-        '\n `You are always free to leave, you can also change your preferences if you decide you don\'t like a niche.`' +
-        '\n\n' +
-        '> **What if I don\'t want to be added to servers anymore?**' +
-        '\n `You can opt out of being added to server by heading to our website.`' +
-        '\n\n' +
-        '> **How can I change my preferences? **' +
-        '\n `Head over to our website by using the button below and going to your profile!`' +
-        '\n\n' +
-        '> **Question**' +
-        '\n\n'
-
-    )
-
-    .setFooter({
-        text: 'Server Rift',
-        iconURL: 'https://andrew-forster.github.io/Images/logofull.png'
-    })
-    .setTimestamp();
-
-//--------------
-// Questions Res
-//--------------
-
-const manageEmbed = new EmbedBuilder()
-    .setColor('#042d62')
-    .setTitle('**Server Rift | Server Manager**')
-    .setURL('https://andrew-forster.github.io/')
-    .setThumbnail('https://andrew-forster.github.io/Images/discordimg.png')
-
-    .setDescription(
-        '# **Server Settings**' +
-        '\n\n' +
-        '> **Prefix**: `.` ' +
-        '\n\n' +
-        '# **Server Commands**' +
-        '\n\n' +
-        '> **View Stats** (`stats`) - View server rift stats like joins, leaves, etc. ' +
-        ' \n' +
-        '> \n' +
-        '> **Ads** (`ads`) - Learn more about Server Rift Ads. ' +
-        ' \n' +
-        '> \n' +
-        '> **Niche** (`niche`) - Set/Request a server niche.' +
-        '\n\n'
-
-    )
-
-    .setFooter({
-        text: 'Server Rift',
-        iconURL: 'https://andrew-forster.github.io/Images/logofull.png'
-    })
-    .setTimestamp();

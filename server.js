@@ -5,6 +5,8 @@ const uri = "mongodb://localhost:27017";
 const mongoose = require('mongoose'); 
 const bodyParser = require('body-parser');
 
+const startBot = require('./bot');
+
 // Middleware
 
 app.use(bodyParser.json());
@@ -45,3 +47,11 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log('Server is running at http://localhost:' + port);
 });
+
+
+// Export the Mongoose connection
+module.exports = mongoose.connection;
+
+// Start the discord bot
+startBot(); 
+

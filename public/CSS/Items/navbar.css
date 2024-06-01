@@ -107,7 +107,7 @@ button a {
     position: relative;
     top: 15px;
     z-index: 15;
-    max-width: 80px;
+    max-width: 60px;
     cursor: pointer;
     transition-duration: 0.5s;
 

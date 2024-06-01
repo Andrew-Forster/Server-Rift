@@ -6,27 +6,7 @@
     display: none;
 } */
 
-html {
-    overscroll-behavior: none;
-    caret-color: transparent;
-    width: 100%;
-    /* overflow: hidden; */
-    animation: screenLock 7s ease-out forwards;
-    -webkit-user-select: none;
-    user-select: none;
-}
 
-/* Background */
-.bg {
-    width: 100%;
-    height: 100%;
-    background: var(--main-gradient);
-    background-size: cover;
-    object-fit: cover;
-    position: fixed;
-    top: 0;
-    z-index: -1;
-}
 
 
 

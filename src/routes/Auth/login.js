@@ -62,13 +62,38 @@ router.get('/discord/callback', catchAsync(async (req, res) => {
     user.date = Date.now() - (expires_in * 1000);
     await user.save();
     session = user.session;
+
+    // Set users name & discord id
+
+    const results = await fetch(`https://discordapp.com/api/users/@me`, {
+      headers: {
+        Authorization: `Bearer ${access_token}`
+      }
+    });
+    let data = (await results.json());
+    user.username = data.username;
+    user.discordId = data.id;
   } else {
+    // Get the user's username and discord id
+    const results = await fetch(`https://discordapp.com/api/users/@me`, {
+      headers: {
+        Authorization: `Bearer ${access_token}`
+      }
+    });
+
+    const {
+      username,
+      id
+    } = await results.json();
+
     // Create a new user
     const newUser = new User({
       discordAccess: access_token,
       discordRefresh: refresh_token,
       date: Date.now() - (expires_in * 1000),
-      session: generateSession(64)
+      session: generateSession(64),
+      username: username,
+      discordId: id
     });
     await newUser.save();
     session = newUser.session;

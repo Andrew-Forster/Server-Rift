@@ -1,7 +1,7 @@
-require('dotenv').config();
 const { REST, Routes } = require('discord.js');
 const fs = require('fs');
 const path = require('path');
+require('dotenv').config({ path: path.resolve(__dirname, '../.env') });
 
 const commands = [];
 const devCommands = [];
@@ -23,8 +23,9 @@ for (const folder of commandFolders) {
             if (folder === 'Admin') {
                 // Add admin commands to devCommands
                 devCommands.push(command.data.toJSON());
+                commands.push(command.data.toJSON());
             } else {
-                devCommands.push(command.data.toJSON());
+                // devCommands.push(command.data.toJSON());
                 commands.push(command.data.toJSON());
             }
         } else {

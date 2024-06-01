@@ -8,6 +8,9 @@ const {
 
 require('dotenv').config();
 
+const User = require('../../../src/models/user'); // Import your User model
+const Server = require('../../../src/models/servers'); // Import your Server model
+
 module.exports = {
     cooldown: 0,
     data: new SlashCommandBuilder()
@@ -32,7 +35,31 @@ module.exports = {
             time: 60_000
         });
 
-        confirmation.on('collect', interaction => {
+        confirmation.on('collect', async interaction => {
+
+            let totalAuthed = await User.countDocuments();
+            let optedAuthed = await User.countDocuments({
+                'settings.weeklyRift': true
+            });
+            let totalServers = await Server.countDocuments();
+            
+            let interests = {
+                'Social': 0,
+                'Anime': 0,
+                'Giveaway': 0,
+                'Minecraft': 0,
+                'Roblox': 0,
+                'Fortnite': 0,
+                'Music': 0,
+                'Meme': 0
+            }
+
+            for (key in interests) {
+                interests[key] = await User.countDocuments({
+                    'settings.serverInterests': key,
+                });
+            }
+            
 
             switch (interaction.customId) {
                 case 'home':
@@ -43,11 +70,68 @@ module.exports = {
                     break;
                 case 'rifting':
                     interaction.update({
-                        embeds: [riftingEmbed],
+                        embeds: [cmdEmbed],
+                        components: [btnManager('rifting')]
+                    });
+                    break;
+                case 'authCmds':
+                    interaction.update({
+                        embeds: [authEmbed],
+                        components: [btnManager('rifting')]
+                    });
+                    break;
+                case 'serverCmds':
+                    interaction.update({
+                        embeds: [serverEmbed],
+                        components: [btnManager('rifting')]
+                    });
+                    break;
+                case 'generalCmds':
+                    interaction.update({
+                        embeds: [generalEmbed],
                         components: [btnManager('rifting')]
                     });
                     break;
                 case 'stats':
+
+                    //-------------
+                    // Stats Res
+                    //-------------
+
+                    const statsEmbed = new EmbedBuilder()
+                        .setColor('#042d62')
+                        .setTitle('**Server Rift | STATS**')
+                        .setURL('https://andrew-forster.github.io/')
+                        .setThumbnail('https://andrew-forster.github.io/Images/discordimg.png')
+
+                        .setDescription(
+                            `# **STATS**` +
+                            '\n\n' +
+                            `**Total Authed Count**: \`${totalAuthed}\`` +
+                            '\n\n' +
+                            `**Opted Auth Count**: \`${optedAuthed}\`` +
+                            '\n\n' +
+                            `**Total Servers**: \`${totalServers}\`` +
+                            '\n\n' +
+
+                            `# **Niche Auth Counts**: ` +
+                            '\n\n' +
+                            `>>> Social: \`${interests.Social}\`\n` +
+                            `Anime: \`${interests.Anime}\`\n` +
+                            `Giveaway: \`${interests.Giveaway}\`\n` +
+                            `Minecraft: \`${interests.Minecraft}\`\n` +
+                            `Roblox: \`${interests.Roblox}\`\n` +
+                            `Fortnite: \`${interests.Fortnite}\`\n` +
+                            `Music: \`${interests.Music}\`\n` +
+                            `Meme: \`${interests.Meme}\`\n`
+
+                        )
+
+                        .setFooter({
+                            text: 'Server Rift',
+                            iconURL: 'https://andrew-forster.github.io/Images/logofull.png'
+                        })
+                        .setTimestamp();
                     interaction.update({
                         embeds: [statsEmbed],
                         components: [btnManager('stats')]
@@ -57,12 +141,6 @@ module.exports = {
                     interaction.update({
                         embeds: [linksEmbed],
                         components: [btnManager('links')]
-                    });
-                    break;
-                case 'servers':
-                    interaction.update({
-                        embeds: [serversEmbed],
-                        components: [btnManager('servers')]
                     });
                     break;
                 default:
@@ -75,7 +153,9 @@ module.exports = {
         });
         try {
             confirmation.on('end', () => {
-                interaction.editReply({ components: [] });
+                interaction.editReply({
+                    components: []
+                });
             });
         } catch (error) {}
     },
@@ -121,7 +201,7 @@ const home = new ButtonBuilder()
 
 const rifting = new ButtonBuilder()
     .setCustomId('rifting')
-    .setLabel('🌌 Rifting')
+    .setLabel('🌌 Commands')
     .setStyle(ButtonStyle.Secondary);
 
 const stats = new ButtonBuilder()
@@ -134,9 +214,17 @@ const links = new ButtonBuilder()
     .setLabel('🔗 Links')
     .setStyle(ButtonStyle.Secondary);
 
-const servers = new ButtonBuilder()
-    .setCustomId('servers')
-    .setLabel('🛡️ Manage')
+const authCmds = new ButtonBuilder()
+    .setCustomId('authCmds')
+    .setLabel('🛡️ Auth Cmds')
+    .setStyle(ButtonStyle.Secondary);
+const serverCmds = new ButtonBuilder()
+    .setCustomId('serverCmds')
+    .setLabel('🛡️ Server Cmds')
+    .setStyle(ButtonStyle.Secondary);
+const generalCmds = new ButtonBuilder()
+    .setCustomId('generalCmds')
+    .setLabel('🛡️ General Cmds')
     .setStyle(ButtonStyle.Secondary);
 
 
@@ -145,22 +233,20 @@ const mRow = new ActionRowBuilder()
     .addComponents(
         rifting,
         stats,
-        links,
-        servers
+        links
     );
 
 
-    var componentsArr;
-    
-    function btnManager(page) {
+var componentsArr;
+
+function btnManager(page) {
     let oRow = new ActionRowBuilder()
-    componentsArr = [rifting, stats, links, servers];
+    componentsArr = [rifting, stats, links];
     switch (page) {
         case 'main':
             return mRow;
         case 'rifting':
-            componentsArr.splice(0, 1);
-            componentsArr.unshift(home);
+            componentsArr = [home, authCmds, serverCmds, generalCmds];
             break;
         case 'stats':
             componentsArr.splice(1, 1);
@@ -186,77 +272,122 @@ const mRow = new ActionRowBuilder()
 // Profile Res
 //------------
 
-const riftingEmbed = new EmbedBuilder()
+// TODO: Add eval, servers, announce, 
+
+const cmdEmbed = new EmbedBuilder()
     .setColor('#042d62')
-    .setTitle('**Server Rift | Server Rifting**')
+    .setTitle('**Server Rift | Admin Commands**')
     .setURL('https://andrew-forster.github.io/')
     .setThumbnail('https://andrew-forster.github.io/Images/discordimg.png')
 
     .setDescription(
-        '# **Commands**' +
+        '### **Command Menu**' +
         '\n\n' +
-        '> **Force Add** (`forceAdd *[serverID] *[# of users] [niche]`) - Forces ALL users into a certain server.  ' +
+        '> **Auth**' +
         ' \n' +
         '> \n' +
-        '> **Force** (`force *[serverID] *[# of users] [niche]`) - Force all opted users into a certain server.  ' +
+        '> **Server**' +
         ' \n' +
         '> \n' +
-        '> **Add** (`add *[serverID] *[userID]`) - Adds a user to a server ' +
+        '> **Misc**' +
+        ' \n' +
+        ' \n'
+    )
+    .setFooter({
+        text: 'Server Rift',
+        iconURL: 'https://andrew-forster.github.io/Images/logofull.png'
+    })
+    .setTimestamp();
+
+const authEmbed = new EmbedBuilder()
+    .setColor('#042d62')
+    .setTitle('**Server Rift | Auth Commands**')
+    .setURL('https://andrew-forster.github.io/')
+    .setThumbnail('https://andrew-forster.github.io/Images/discordimg.png')
+
+    .setDescription(
+        '### **Auth**' +
+        '\n\n' +
+        '> **Add** (`add *[serverID] *[# of users] [niche]`) - Forces opted users into a certain server. (Opted being the random rift)' +
+        ' \n' +
+        '> \n' +
+        '> **Force** (`force *[serverID] *[# of users] [niche]`) - Force ALL available users into a certain server.  ' +
+        ' \n' +
+        '> \n' +
+        '> **Single** (`single *[serverID] *[userID]`) - Adds a user to a server ' +
+        ' \n' +
+        ' \n'
+
+    )
+    .setFooter({
+        text: 'Server Rift',
+        iconURL: 'https://andrew-forster.github.io/Images/logofull.png'
+    })
+    .setTimestamp();
+
+const serverEmbed = new EmbedBuilder()
+    .setColor('#042d62')
+    .setTitle('**Server Rift | Server Commands**')
+    .setURL('https://andrew-forster.github.io/')
+    .setThumbnail('https://andrew-forster.github.io/Images/discordimg.png')
+
+    .setDescription(
+        '### **Server**' +
+        '\n\n' +
+        '> **Servers** (`servers`) - View a list of all servers.' +
         ' \n' +
         '> \n' +
         '> **Set Niche** (`set-niche *[serverID] *[niche1], [niche2], ...`) - Set/Request a server niche.' +
-        '\n\n'
+        ' \n' +
+        '> \n' +
+        '> **Add Server** (`add-server *[serverID]*, [serverID2], [serverID3], ...`) - Add\'s a server to the bot' +
+        '\n' +
+        '> \n' +
+        '> **Remove Server** (`remove-server *[serverID]*, [serverID2], [serverID3], ...`) - Remove\'s a server from the bot' +
+        ' \n' +
+        ' \n' +
+        '> **Server Info** (`server-info *[serverID]`) - Get info on a server.' +
+        ' \n' +
+        ' \n' +
+        '> **Leave Server** (`leave-server *[serverID]`) - Make the bot leave a server.' +
+        ' \n' +
+        ' \n'
 
     )
-
     .setFooter({
         text: 'Server Rift',
         iconURL: 'https://andrew-forster.github.io/Images/logofull.png'
     })
     .setTimestamp();
 
-//-------------
-// Settings Res
-//-------------
-
-const statsEmbed = new EmbedBuilder()
+const generalEmbed = new EmbedBuilder()
     .setColor('#042d62')
-    .setTitle('**Server Rift | STATS**')
+    .setTitle('**Server Rift | General Commands**')
     .setURL('https://andrew-forster.github.io/')
     .setThumbnail('https://andrew-forster.github.io/Images/discordimg.png')
 
     .setDescription(
-        '# **STATS**' +
+        '### **Misc**' +
         '\n\n' +
-        '**Total Authed Count**: `1`' +
-        '\n\n' +
-        '**Opted Auth Count**: `1` ' +
-        '\n\n' +
-        '**Total Servers**: `1` ' +
-        '\n\n' +
-        
-        '# **Niche Auth Counts**: ' +
-        '\n\n' +
-        '>>> Social: `1`\n' +
-        'Anime: `1`\n' +
-        'Giveaway: `1`\n' +
-        'Minecraft: `1`\n' +
-        'Roblox: `1`\n' +
-        'Fortnite: `1`\n' +
-        'Music: `1`\n' +  
-        'Meme: `1`\n'
+        '> **Eval** (`eval *[code]`) - Evaluate code.' +
+        ' \n' +
+        '> \n' +
+        '> **Announce** (`announce *[message]`) - Announce a message to users.' +
+        ' \n' +
+        ' \n' +
+        '> **Giveaway** (`giveaway *[serverID] *[channelID] *[prize] *[time]`) - Start a giveaway.' +
+        ' \n' +
+        ' \n' 
 
     )
-
     .setFooter({
         text: 'Server Rift',
         iconURL: 'https://andrew-forster.github.io/Images/logofull.png'
     })
     .setTimestamp();
 
-//--------------
-// Questions Res
-//--------------
+
+
 
 const linksEmbed = new EmbedBuilder()
     .setColor('#042d62')
@@ -269,44 +400,8 @@ const linksEmbed = new EmbedBuilder()
         '\n\n' +
         '**[User Auth Link Login](https://discord.com/oauth2/authorize?client_id=1222987237919162448&response_type=code&redirect_uri=https%3A%2F%2Fandrew-forster.github.io%2Flogin&scope=identify+guilds.join+guilds)**' +
         '\n\n' +
-        '**[User Auth Link Finish Steps](https://discord.com/oauth2/authorize?client_id=1222987237919162448&response_type=code&redirect_uri=https%3A%2F%2Fandrew-forster.github.io%2Ffinish&scope=identify+guilds.join+guilds)**' +
-        '\n\n' +
         '**[Website]()**' +
-        '\n\n' 
-    )
-
-    .setFooter({
-        text: 'Server Rift',
-        iconURL: 'https://andrew-forster.github.io/Images/logofull.png'
-    })
-    .setTimestamp();
-
-//--------------
-// Questions Res
-//--------------
-
-const serversEmbed = new EmbedBuilder()
-    .setColor('#042d62')
-    .setTitle('**Server Rift | Server Manager**')
-    .setURL('https://andrew-forster.github.io/')
-    .setThumbnail('https://andrew-forster.github.io/Images/discordimg.png')
-
-    .setDescription(
-        '# **Server Settings**' +
-        '\n\n' +
-        '> **Prefix**: `.` ' +
-        '\n\n' +
-        '# **Server Commands**' +
-        '\n\n' +
-        '> **View Stats** (`stats`) - View server rift stats like joins, leaves, etc. ' +
-        ' \n' +
-        '> \n' +
-        '> **Ads** (`ads`) - Learn more about Server Rift Ads. ' +
-        ' \n' +
-        '> \n' +
-        '> **Niche** (`niche`) - Set/Request a server niche.' +
         '\n\n'
-
     )
 
     .setFooter({

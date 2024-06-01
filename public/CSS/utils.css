@@ -2,7 +2,8 @@
 /* Interests Checkboxes */
 /* -------------------- */
 
-* {
+.interests *,
+.preferences * {
     /* For Checkboxes */
     box-sizing: border-box;
 }
