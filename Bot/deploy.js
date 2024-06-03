@@ -23,7 +23,7 @@ for (const folder of commandFolders) {
             if (folder === 'Admin') {
                 // Add admin commands to devCommands
                 devCommands.push(command.data.toJSON());
-                commands.push(command.data.toJSON());
+                // commands.push(command.data.toJSON());
             } else {
                 // devCommands.push(command.data.toJSON());
                 commands.push(command.data.toJSON());
