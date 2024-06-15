@@ -5,7 +5,7 @@ const uri = "mongodb://localhost:27017";
 const mongoose = require('mongoose'); 
 const bodyParser = require('body-parser');
 
-const startBot = require('./bot');
+const startBot = require('./bot').startBot;
 
 // Middleware
 
@@ -53,5 +53,9 @@ app.listen(port, () => {
 module.exports = mongoose.connection;
 
 // Start the discord bot
-startBot(); 
+try {
+    startBot();
+} catch (error) {
+    console.log('[Bot Failed to Start] ' + error);
+}
 

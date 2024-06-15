@@ -1,73 +1,57 @@
-	const startBot = () => {
+require('dotenv').config();
+const {
+	Client,
+	Collection,
+	GatewayIntentBits
+} = require('discord.js');
+const fs = require('fs');
+const path = require('path');
 
-		require('dotenv').config(); //initializes dotenv
-		const fs = require('node:fs');
-		const path = require('node:path');
-		const {
-			Client,
-			Collection,
-			GatewayIntentBits
-		} = require('discord.js');
+const client = new Client({
+	intents: [
+		GatewayIntentBits.Guilds,
+		GatewayIntentBits.GuildMembers
+	]
+});
+client.commands = new Collection();
+client.cooldowns = new Collection();
 
-		const prefix = process.env.defPrefix; //sets the prefix to the one in the .env file
+async function startBot() {
+	await loadCommands();
+	await loadEvents();
+	await client.login(process.env.token);
 
-		const client = new Client({
-			intents: [
-				GatewayIntentBits.Guilds,
-				GatewayIntentBits.GuildMembers
-			]
-		});
-		client.commands = new Collection();
-		client.cooldowns = new Collection();
+	const giveaways = require('./timers/giveaways.js');
+	giveaways.checkGiveaways(client); // Start the giveaway timer
+}
 
-		// Grab all the command folders from the commands directory you created earlier
-		const foldersPath = path.join(__dirname, 'commands');
-		const commandFolders = fs.readdirSync(foldersPath);
-
-		for (const folder of commandFolders) {
-			const commandsPath = path.join(foldersPath, folder);
-			const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
-			for (const file of commandFiles) {
-				const filePath = path.join(commandsPath, file);
-				const command = require(filePath);
-				// Set a new item in the Collection with the key as the command name and the value as the exported module
-				if ('data' in command && 'execute' in command) {
-					client.commands.set(command.data.name, command);
-				} else {
-					console.log(`[WARNING] The command at ${filePath} is missing a required "data" or "execute" property.`);
-				}
-			}
-		}
-
-		const eventsPath = path.join(__dirname, 'Events');
-		const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
-
-		for (const file of eventFiles) {
-			const filePath = path.join(eventsPath, file);
-			const event = require(filePath);
-			if (event.once) {
-				client.once(event.name, (...args) => event.execute(...args));
+async function loadCommands() {
+	const commandFolders = fs.readdirSync(path.join(__dirname, 'commands'));
+	for (const folder of commandFolders) {
+		const commandFiles = fs.readdirSync(path.join(__dirname, 'commands', folder)).filter(file => file.endsWith('.js'));
+		for (const file of commandFiles) {
+			const command = require(path.join(__dirname, 'commands', folder, file));
+			if ('data' in command && 'execute' in command) {
+				client.commands.set(command.data.name, command);
 			} else {
-				client.on(event.name, (...args) => event.execute(...args));
+				console.log(`[WARNING] The command at ${path.join(__dirname, 'commands', folder, file)} is missing a required "data" or "execute" property.`);
 			}
-		}
-
-
-		client.login(process.env.token); //signs the bot in with token
-	};
-
-	module.exports = startBot;
-
-	// Function to log error to Discord channel
-	async function logErrorToDiscord(error) {
-		try {
-			const channel = await client.channels.fetch(process.env.errorChannel);
-			if (channel && channel instanceof TextChannel) {
-				await channel.send(`Error occurred: \`\`\`${error}\`\`\``);
-			} else {
-				console.error('Error logging channel not found');
-			}
-		} catch (err) {
-			console.error('Error logging to Discord:', err);
 		}
 	}
+}
+
+async function loadEvents() {
+	const eventFiles = fs.readdirSync(path.join(__dirname, 'Events')).filter(file => file.endsWith('.js'));
+	for (const file of eventFiles) {
+		const event = require(path.join(__dirname, 'Events', file));
+		if (event.once) {
+			client.once(event.name, (...args) => event.execute(...args));
+		} else {
+			client.on(event.name, (...args) => event.execute(...args));
+		}
+	}
+}
+
+module.exports = {
+	startBot
+};

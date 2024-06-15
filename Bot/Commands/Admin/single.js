@@ -7,7 +7,7 @@ require('dotenv').config();
 
 
 const mongoose = require('mongoose');
-const User = require('../../../src/models/user'); // Import your User model
+const User = require('../../../src/models/user.js'); // Import your User model
 const dbConnection = require('../../../server.js'); // Import the exported connection from server.js
 
 module.exports = {
