@@ -8,6 +8,7 @@ const {
     ActionRowBuilder
 } = require('discord.js');
 const uuid = require('uuid');
+const User = require('../../src/models/user');
 
 //TODO: Convert to save to database
 
@@ -195,42 +196,96 @@ function collect(message, duration, prize) {
 
     collector.on('collect', async interaction => {
         try {
-            const users = await getGiveawayUsers(message.id);
+            let users = await getGiveawayUsers(message.id);
 
             if (interaction.customId == 'enter' && users.includes(interaction.user.id)) {
                 await interaction.reply({
                     content: `You have already entered the giveaway for **${prize}**!`,
-                    components: [leave],
+                    // components: [leave],
                     ephemeral: true
                 });
             } else {
                 addGiveawayUser(message.id, interaction.user.id);
                 await interaction.reply({
                     content: `You have entered the giveaway for **${prize}**!`,
-                    components: [leave],
+                    // components: [leave],
                     ephemeral: true
                 });
             }
 
-            const col = interaction.channel.createMessageComponentCollector({
-                time: 10000
+            // Leave Button
+
+            // const col = interaction.channel.createMessageComponentCollector({
+            //     time: 10000
+            // });
+            // col.on('collect', async i => {
+            //     users = await getGiveawayUsers(message.id);
+            //     if (i.customId === 'leave' && users.includes(i.user.id)) {
+            //         removeGiveawayUser(message.id, interaction.user.id);
+            //         await i.reply({
+            //             content: `You have left the giveaway for **${prize}**!`,
+            //             ephemeral: true
+            //         });
+            //     } else {
+            //         await i.reply({
+            //             content: `You have already left the giveaway for **${prize}**!`,
+            //             ephemeral: true
+            //         });
+            // }
+            // });
+
+
+        } catch (error) {
+            console.log('Error handling interaction:', error);
+            await interaction.reply({
+                content: 'There was an error processing your request.',
+                ephemeral: true
             });
-            col.on('collect', async i => {
-                if (i.customId === 'leave' && !users.includes(i.user.id)) {
-                    removeGiveawayUser(message.id, interaction.user.id);
-                    await i.reply({
-                        content: `You have left the giveaway for **${prize}**!`,
-                        ephemeral: true
-                    });
-                } else {
-                    await i.reply({
-                        content: `You have already left the giveaway for **${prize}**!`,
-                        ephemeral: true
-                    });
+        }
+
+    });
+}
+
+function reqCollect(message, duration, prize) {
+    // Reaction Collector to respond to users entering
+    const collector = message.createMessageComponentCollector({
+        time: duration
+    });
+    const leaveBtn = new ButtonBuilder()
+    .setCustomId('leave')
+    .setLabel('Leave')
+    .setStyle(ButtonStyle.Danger);
+
+    const leave = new ActionRowBuilder().addComponents(leaveBtn);
+
+    collector.on('collect', async interaction => {
+        try {
+            let users = await getGiveawayUsers(message.id);
+            let dbUser = await User.findOne(
+                {
+                    discordId: interaction.user.id
                 }
-            });
+            );
+            if (!dbUser) {
+                await interaction.reply({
+                    content: `You have not registered with Server Rift yet! Please register with the bot to enter the giveaway for **${prize}**!`,
+                    ephemeral: true
+                });
+                return;
+            }
 
-
+            if (interaction.customId == 'enter' && users.includes(interaction.user.id)) {
+                await interaction.reply({
+                    content: `You have already entered the giveaway for **${prize}**!`,
+                    ephemeral: true
+                });
+            } else {
+                addGiveawayUser(message.id, interaction.user.id);
+                await interaction.reply({
+                    content: `You have entered the giveaway for **${prize}**! Thanks for signing up for Server Rift!`,
+                    ephemeral: true
+                });
+            }
         } catch (error) {
             console.log('Error handling interaction:', error);
             await interaction.reply({
@@ -251,7 +306,8 @@ module.exports = {
     addGiveawayUser,
     removeGiveawayUser,
     getGiveawayUsers,
-    collect
+    collect,
+    reqCollect
 }
 
 

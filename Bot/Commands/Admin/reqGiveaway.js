@@ -2,21 +2,23 @@ const {
     SlashCommandBuilder
 } = require('@discordjs/builders');
 const {
-    EmbedBuilder
+    EmbedBuilder,
+    ButtonBuilder,
+    ButtonStyle,
+    ActionRowBuilder
 } = require('discord.js');
 const path = require('path');
 require('discord.js');
 require('dotenv').config();
 
 const giveaways = require('../../timers/giveaways.js');
-const { cp } = require('fs');
 
 
 module.exports = {
     cooldown: 0,
     data: new SlashCommandBuilder()
         .setName('reqg')
-        .setDescription('Starts a giveaway with a requirement.')
+        .setDescription('Starts a requirement giveaway in the current server.')
         .addStringOption(option =>
             option.setName('prize')
             .setDescription('The prize for the giveaway.')
@@ -28,7 +30,7 @@ module.exports = {
             .setRequired(true)
         )
         .addStringOption(option =>
-            option.setName('channel') 
+            option.setName('channel_id')
             .setDescription('The channel to start the giveaway in.')
             .setRequired(false)
         )
@@ -41,7 +43,7 @@ module.exports = {
 
         const prize = interaction.options.getString('prize');
         const duration = parseDur(interaction.options.getString('duration'));
-        const channel = interaction.options.getString('channel') || interaction.channel.name;
+        const channel = interaction.options.getString('channel_id') || interaction.channel.id;
         const winners = interaction.options.getInteger('winners') || 1;
 
         const endTime = new Date(Date.now() + duration);
@@ -54,31 +56,51 @@ module.exports = {
             return interaction.reply('The number of winners must be at least 1.');
         }
 
-        const giveawayChannel = interaction.guild.channels.cache.find(ch => ch.name === channel) || null;
+        const giveawayChannel = interaction.guild.channels.cache.find(ch => ch.id === channel) || null;
         if (!giveawayChannel) {
             return interaction.reply('I could not find that channel.');
         }
 
         const giveawayEmbed = new EmbedBuilder()
             .setTitle('🎉 Giveaway 🎉')
-            .setDescription(`React with 🎉 to enter the giveaway!\nPrize: **${prize}**\nWinners: **${winners}**` + `\n\nEnds at ${formatDate(endTime)}`)
+            .setDescription(`Prize: **${prize}**\nWinners: **${winners}**`
+                + `\nEnds at ${formatDate(endTime)}`
+                + `\nRequirement:`
+                + `\n- Sign up for Server Rift at **[serverrift.com](https://serverrift.com/get-started)**`
+                + `\n\n**Note:** \`You must be signed up for Server Rift to be eligible to win the giveaway. Leaving Server Rift after entering the giveaway will disqualify you from winning.\``)
             .setFooter({
                 text: 'Giveaway hosted by Server Rift, Learn more at serverrift.com',
                 iconURL: 'https://andrew-forster.github.io/Images/logofull.png'
             })
             .setColor('#3a7ce5');
 
+        const enterBtn = new ButtonBuilder()
+            .setCustomId('enter')
+            .setLabel('Enter')
+            .setStyle(ButtonStyle.Success);
+
+
+        const enter = new ActionRowBuilder().addComponents(enterBtn);
+
+
         const message = await giveawayChannel.send({
-            embeds: [giveawayEmbed]
+            embeds: [giveawayEmbed],
+            components: [enter]
         });
-        message.react('🎉');
+
         // Todo: Change giveaway server to the server the giveaway is in
         giveaways.saveGiveaway(prize, endTime, winners, giveawayChannel.id, interaction.guild.id, message.id);
 
-        interaction.reply('The giveaway has been started.');
+        interaction.reply({
+            content: 'The giveaway has been started in the server: ' + interaction.guild.name + ' in the channel: ' + giveawayChannel.name + '.',
+            ephemeral: true
+        });
+
+        giveaways.reqCollect(message, duration, prize);
     }
 
 }
+
 
 function parseDur(dur) {
     const match = dur.match(/^(\d+)([smhd])$/);

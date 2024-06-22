@@ -14,7 +14,7 @@ const giveaways = require('../../timers/giveaways.js');
 module.exports = {
     cooldown: 0,
     data: new SlashCommandBuilder()
-        .setName('re-giveaway')
+        .setName('react-giveaway')
         .setDescription('Starts a giveaway in the current server.')
         .addStringOption(option =>
             option.setName('prize')
