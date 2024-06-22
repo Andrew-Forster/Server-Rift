@@ -31,5 +31,17 @@ module.exports = {
 				errorChannel.send(`[bot] An error occurred: \`\`\`${error}\`\`\``);
 			}
 		};
+
+
+		const giveaways = require('../timers/giveaways.js');
+		giveaways.checkGiveaways(client); // Start the giveaway timer
+
+
+
+
+
+
+
+
 	},
 };

@@ -1,3 +1,5 @@
+//TODO: 
+
 require('dotenv').config();
 const {
 	Client,
@@ -20,9 +22,6 @@ async function startBot() {
 	await loadCommands();
 	await loadEvents();
 	await client.login(process.env.token);
-
-	const giveaways = require('./timers/giveaways.js');
-	giveaways.checkGiveaways(client); // Start the giveaway timer
 }
 
 async function loadCommands() {
