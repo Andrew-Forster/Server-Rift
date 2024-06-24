@@ -1,3 +1,11 @@
+// TODO: Secure API Endpoints with JWT
+// TODO: - Use validation
+// TODO: - Use rate limiting
+// TODO: - Use secure headers
+
+// TODO: Change the way user tokens are generated, currently it is not secure
+
+
 const express = require('express');
 const path = require('path');
 const app = express();
