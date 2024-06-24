@@ -52,6 +52,9 @@ app.listen(port, () => {
 // Export the Mongoose connection
 module.exports = mongoose.connection;
 
+
+
+
 // Start the discord bot
 try {
     startBot();
@@ -59,3 +62,4 @@ try {
     console.log('[Bot Failed to Start] ' + error);
 }
 
+ 

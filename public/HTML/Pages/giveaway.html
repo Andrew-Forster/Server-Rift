@@ -1,0 +1,74 @@
+<!-- Andrew Forster
+   - Project Date
+   - Server Rift
+   - Sources:
+   + 
+   + 
+
+   Better Comments Extension
+    ! Important
+    * Highlight
+    ? Question
+    TODO: Todo
+ -->
+
+ <!DOCTYPE html>
+ <html lang="en">
+   <head>
+     <meta charset="UTF-8" />
+     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <link rel="icon" type="/image/jpg" href="Images/logo.png">
+     <title>Giveaway Info</title>
+ 
+     <!-- JQUERY LINKING -->
+     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+ 
+     <!--*---------------------->
+     <!--* CSS PAGE LINKING'S -->
+     <!--*---------------------->
+ 
+     <link rel="stylesheet" type="text/css" href="/CSS/styles.css" />
+     <link rel="stylesheet" type="text/css" href="/CSS/Pages/Giveaway.css" />
+     <link rel="stylesheet" type="text/css" href="/CSS/utils.css" />
+ 
+     <!--*------------------------>
+     <!--* End of CSS LINKING'S -->
+     <!--*------------------------>
+     <script src="/JS/utils.js"></script>
+     <script src="/JS/Pages/giveaway.js" defer></script>
+ 
+     <!-- Navbar -->
+     <div id="nav-placeholder"></div>
+   </head>
+ 
+   <body>
+     <main>
+        <section class="cont pre-load" id="g">
+            <div class="pre-h pre-load2"></div>
+            <div class="pre-p pre-load2"></div>
+            <div class="pre-p pre-load2"></div>
+            <div class="pre-p pre-load2"></div>
+            <div class="pre-t pre-load2"></div>
+        </section>
+     </main>
+ 
+ 
+     <div id="footer-placeholder"></div>
+   </body>
+ </html>
+ 
+ <!-- Navbar JS Code -->
+ <script>
+   $(function () {
+     $("#nav-placeholder").load("/HTML/Items/navbar.html");
+   });
+ </script>
+ 
+ <!-- Footer JS Code -->
+ <script>
+   
+   $(function () {
+     $("#footer-placeholder").load("/HTML/Items/footer.html");
+   });
+ </script>
+ 

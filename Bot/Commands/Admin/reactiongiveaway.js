@@ -38,6 +38,10 @@ module.exports = {
         ),
     async execute(interaction) {
 
+        if (!process.env.adminUsers.includes(interaction.user.id)) {
+            return interaction.editReply('Sorry, you do not have permission to use this command.');
+        }
+        
         const prize = interaction.options.getString('prize');
         const duration = parseDur(interaction.options.getString('duration'));
         const channel = interaction.options.getString('channel_id') || interaction.channel.id;
@@ -72,7 +76,7 @@ module.exports = {
         });
         message.react('🎉');
         // Todo: Change giveaway server to the server the giveaway is in
-        giveaways.saveGiveaway(prize, endTime, winners, giveawayChannel.id, interaction.guild.id, message.id);
+        giveaways.saveGiveaway(prize, endTime, winners, giveawayChannel.id, interaction.guild.id, interaction.guild.name, message.id);
 
         interaction.reply('The giveaway has been started in the server: ' + interaction.guild.name + ' in the channel: ' + giveawayChannel.name);
 

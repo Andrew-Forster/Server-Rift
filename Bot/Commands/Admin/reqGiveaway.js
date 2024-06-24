@@ -12,6 +12,7 @@ require('discord.js');
 require('dotenv').config();
 
 const giveaways = require('../../timers/giveaways.js');
+const domain = process.env.DOMAIN;
 
 
 module.exports = {
@@ -41,10 +42,16 @@ module.exports = {
         ),
     async execute(interaction) {
 
+
+        if (!process.env.adminUsers.includes(interaction.user.id)) {
+            return interaction.editReply('Sorry, you do not have permission to use this command.');
+        }
+        
         const prize = interaction.options.getString('prize');
         const duration = parseDur(interaction.options.getString('duration'));
         const channel = interaction.options.getString('channel_id') || interaction.channel.id;
         const winners = interaction.options.getInteger('winners') || 1;
+        const id = giveaways.genUUID();
 
         const endTime = new Date(Date.now() + duration);
 
@@ -62,11 +69,13 @@ module.exports = {
         }
 
         const giveawayEmbed = new EmbedBuilder()
-            .setTitle('🎉 Giveaway 🎉')
-            .setDescription(`Prize: **${prize}**\nWinners: **${winners}**`
-                + `\nEnds at ${formatDate(endTime)}`
-                + `\nRequirement:`
-                + `\n- Sign up for Server Rift at **[serverrift.com](https://serverrift.com/get-started)**`
+            .setTitle('<a:giveaway:761350851725492265> Giveaway <a:giveaway:761350851725492265>')
+            .setDescription(`Prize: **${prize}**
+                \n<:love_u:792941995974852608> | Winners: **${winners}**`
+                + `\n<a:loading:761360532783497296> | Ends at ${formatDate(endTime)}`
+                + `\n\nRequirements:`
+                + `\n- Enable Server Rift at **[serverrift.com](https://serverrift.com/get-started)**`
+                + `\n- Have the \`Random Rift\` setting enabled (Will be auto-applied when entering this giveaway)`
                 + `\n\n**Note:** \`You must be signed up for Server Rift to be eligible to win the giveaway. Leaving Server Rift after entering the giveaway will disqualify you from winning.\``)
             .setFooter({
                 text: 'Giveaway hosted by Server Rift, Learn more at serverrift.com',
@@ -74,13 +83,18 @@ module.exports = {
             })
             .setColor('#3a7ce5');
 
-        const enterBtn = new ButtonBuilder()
-            .setCustomId('enter')
-            .setLabel('Enter')
-            .setStyle(ButtonStyle.Success);
+            const enterBtn = new ButtonBuilder()
+                .setCustomId('enter')
+                .setLabel('Enter')
+                .setStyle(ButtonStyle.Success);
+            const viewBtn = new ButtonBuilder()
+                .setURL(`${domain}/giveaway?id=${id}`)
+                .setLabel('View')
+                .setStyle(ButtonStyle.Link);
 
 
-        const enter = new ActionRowBuilder().addComponents(enterBtn);
+
+            const enter = new ActionRowBuilder().addComponents(enterBtn, viewBtn);
 
 
         const message = await giveawayChannel.send({
@@ -89,7 +103,7 @@ module.exports = {
         });
 
         // Todo: Change giveaway server to the server the giveaway is in
-        giveaways.saveGiveaway(prize, endTime, winners, giveawayChannel.id, interaction.guild.id, message.id);
+        giveaways.saveGiveaway(id, prize, endTime, winners, giveawayChannel.id, interaction.guild.id, interaction.guild.name, message.id);
 
         interaction.reply({
             content: 'The giveaway has been started in the server: ' + interaction.guild.name + ' in the channel: ' + giveawayChannel.name + '.',

@@ -1,0 +1,115 @@
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10rem; 
+    height: calc(100vh - 10rem);
+}
+
+main .giveaway {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 6rem;
+    border-radius: 7px;
+    box-shadow: 1rem 1rem 10px rgba(0, 0, 0, 0.3);
+    background: var(--steps-end-color);
+    margin-bottom: 10rem;
+    width: 380px;
+    height: 440px;
+}
+
+h2 {
+    text-align: center;
+
+}
+
+b {
+    color: rgb(39, 109, 190);
+    text-shadow: 1px 1px 1px var(--main-shadow);
+}
+
+
+main .cont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 6rem;
+    border-radius: 7px;
+    box-shadow: 1rem 1rem 10px rgba(0, 0, 0, 0.3);
+    background: var(--steps-end-color);
+    margin-bottom: 10rem;
+    width: 380px;
+    min-height: 440px;
+}
+
+.pre-h {
+    /* margin-top: 20px; */
+    margin-bottom: 50px;
+    width: 350px;
+    height: 50px;
+}
+
+.pre-p {
+    margin: 24px 0;
+    width: 125px;
+    min-height: 40px;
+}
+
+.pre-t {
+    margin: 24px 0 0 0;
+    width: 200px;
+    min-height: 40px;
+}
+
+.pre-load {
+    background: var(--color-preloader);
+    background-size: 3000px 3000px;
+    animation: preLoadShimmer 1.2s infinite linear;
+}
+
+.pre-load2 {
+    background: var(--color-preloader2);
+    background-size: 3000px 3000px;
+    animation: preLoadShimmer 1.2s infinite linear;
+}
+
+@keyframes preLoadShimmer {
+    0% {
+      background-position: -1400px -1400px
+    }
+    100% {
+      background-position: 1400px 1400px
+    }
+  }
+
+
+
+
+@media (max-width: 768px) {
+
+    main .giveaway {
+        height: 400px;
+    }
+
+    main .cont {
+        width: 250px;
+    }
+
+    .pre-h {
+        width: 280px;
+        height: 40px;
+    }
+
+    .pre-p {
+        width: 100px;
+        min-height: 30px;
+    }
+
+    .pre-t {
+        width: 150px;
+        min-height: 30px;
+    }
+    
+}

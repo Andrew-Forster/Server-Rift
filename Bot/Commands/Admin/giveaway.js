@@ -13,6 +13,8 @@
 
     const giveaways = require('../../timers/giveaways.js');
 
+    const domain = process.env.DOMAIN;
+
 
     module.exports = {
         cooldown: 0,
@@ -41,11 +43,15 @@
             ),
         async execute(interaction) {
 
+            if (!process.env.adminUsers.includes(interaction.user.id)) {
+                return interaction.reply('Sorry, you do not have permission to use this command.');
+            }
+            
             const prize = interaction.options.getString('prize');
             const duration = parseDur(interaction.options.getString('duration'));
             const channel = interaction.options.getString('channel_id') || interaction.channel.id;
             const winners = interaction.options.getInteger('winners') || 1;
-
+            const id = giveaways.genUUID();
             const endTime = new Date(Date.now() + duration);
 
             if (duration < 1000) {
@@ -61,11 +67,16 @@
                 return interaction.reply('I could not find that channel.');
             }
 
+
             const giveawayEmbed = new EmbedBuilder()
-                .setTitle('🎉 Giveaway 🎉')
-                .setDescription(`React with 🎉 to enter the giveaway!\nPrize: **${prize}**\nWinners: **${winners}**` + `\n\nEnds at ${formatDate(endTime)}`)
+                .setTitle('<a:giveaway:761350851725492265> Giveaway <a:giveaway:761350851725492265>')
+                .setDescription(`\nPrize: **${prize}**
+                    \n<:love_u:792941995974852608> | Winners: **${winners}**
+                    \n<a:loading:761360532783497296> | Ends at ${formatDate(endTime)}
+                    \n\n - For more information about this giveaway (Entries, Time, etc) click the \`VIEW\` button below.`
+                )
                 .setFooter({
-                    text: 'Giveaway hosted by Server Rift, Learn more at serverrift.com',
+                    text: 'Giveaway hosted by Server Rift!',
                     iconURL: 'https://andrew-forster.github.io/Images/logofull.png'
                 })
                 .setColor('#3a7ce5');
@@ -74,18 +85,23 @@
                 .setCustomId('enter')
                 .setLabel('Enter')
                 .setStyle(ButtonStyle.Success);
+            const viewBtn = new ButtonBuilder()
+                .setURL(`${domain}/giveaway?id=${id}`)
+                .setLabel('View')
+                .setStyle(ButtonStyle.Link);
 
 
-            const enter = new ActionRowBuilder().addComponents(enterBtn);
+
+            const enter = new ActionRowBuilder().addComponents(enterBtn, viewBtn);
 
 
             const message = await giveawayChannel.send({
                 embeds: [giveawayEmbed],
                 components: [enter]
             });
+            giveaways.saveGiveaway(id, prize, endTime, winners, giveawayChannel.id, interaction.guild.id, interaction.guild.name, message.id);
 
             // Todo: Change giveaway server to the server the giveaway is in
-            giveaways.saveGiveaway(prize, endTime, winners, giveawayChannel.id, interaction.guild.id, message.id);
 
             interaction.reply({
                 content: 'The giveaway has been started in the server: ' + interaction.guild.name + ' in the channel: ' + giveawayChannel.name + '.',

@@ -41,6 +41,9 @@
     --cardbg: rgb(25, 32, 40);
     /* Card Background */
 
+    --color-preloader: linear-gradient(to right bottom, var(--steps-end-color) 8%, #d4d4d452 14%, var(--steps-end-color) 22%);
+    --color-preloader2: linear-gradient(to right bottom, #38404f 8%, #d4d4d452 14%, #38404f 22%);
+
 }
 
 

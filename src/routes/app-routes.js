@@ -13,6 +13,10 @@ router.get('/get-started', (req, res) => {
     res.sendFile('HTML/Pages/getstarted.html', { root: './public' });
 });
 
+router.get('/giveaway', (req, res) => {
+    res.sendFile('HTML/Pages/giveaway.html', { root: './public' });
+});
+
 router.get('/explore', (req, res) => {
     res.sendFile('HTML/Pages/explore.html', { root: './public' });
 });
