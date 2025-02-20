@@ -228,8 +228,6 @@ async function giveawayComplete(giveaway, client) {
     removeGiveaway(giveaway.id, winnerNames, winnerIds);
 }
 
-// TODO: If already left, don't remove from users
-
 function collect(message, duration, prize) {
     // Reaction Collector to respond to users entering
     const collector = message.createMessageComponentCollector({
@@ -237,12 +235,12 @@ function collect(message, duration, prize) {
     });
 
     
-    const leaveBtn = new ButtonBuilder()
-    .setCustomId('leave')
-    .setLabel('Leave')
-    .setStyle(ButtonStyle.Danger);
+    // const leaveBtn = new ButtonBuilder()
+    // .setCustomId('leave')
+    // .setLabel('Leave')
+    // .setStyle(ButtonStyle.Danger);
 
-    const leave = new ActionRowBuilder().addComponents(leaveBtn);
+    // const leave = new ActionRowBuilder().addComponents(leaveBtn);
 
     collector.on('collect', async interaction => {
         try {
@@ -296,17 +294,19 @@ function collect(message, duration, prize) {
     });
 }
 
+
 function reqCollect(message, duration, prize) {
-    // Reaction Collector to respond to users entering
+    // Btn Collector to respond to users entering
     const collector = message.createMessageComponentCollector({
         time: duration
     });
-    const leaveBtn = new ButtonBuilder()
-    .setCustomId('leave')
-    .setLabel('Leave')
-    .setStyle(ButtonStyle.Danger);
 
-    const leave = new ActionRowBuilder().addComponents(leaveBtn);
+    const reqBtn = new ButtonBuilder()
+    .setURL(`${domain}/get-started`)
+    .setLabel('Sign Up Here')
+    .setStyle(ButtonStyle.Link);
+
+    const reqRow = new ActionRowBuilder().addComponents(reqBtn);
 
     collector.on('collect', async interaction => {
         try {
@@ -319,10 +319,21 @@ function reqCollect(message, duration, prize) {
             if (!dbUser) {
                 await interaction.reply({
                     content: `You have not registered with Server Rift yet! Please register with the bot to enter the giveaway for **${prize}**!`,
+                    components: [reqRow],
                     ephemeral: true
                 });
                 return;
             }
+
+            if (dbUser.settings.weeklyRift === false) {
+                await interaction.reply({
+                    content: `You have entered the giveaway for **${prize}**! The weekly rift was disabled in your settings and has been auto-enabled.`,
+                    components: [reqRow],
+                    ephemeral: true
+                });
+                return;
+            }
+
 
             if (interaction.customId == 'enter' && users.includes(interaction.user.id)) {
                 await interaction.reply({

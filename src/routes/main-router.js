@@ -6,6 +6,7 @@ const userRoutes = require('./auth/users');
 const userSettingsRoutes = require('./auth/user-settings');
 const userLoginRoutes = require('./auth/login');
 const appRoutes = require('./app-routes');
+
 router.use('/auth', userRoutes);
 router.use('/auth', userSettingsRoutes);
 router.use('/auth', userLoginRoutes);

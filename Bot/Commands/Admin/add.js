@@ -68,7 +68,7 @@ module.exports = {
         const guildId = interaction.options.getString('server_id');
         const guild = interaction.guild;
         const member = await guild.members.fetch(interaction.user.id);
-        
+
         if (!interaction.client.guilds.cache.has(guildId)) {
             return interaction.editReply('The bot is not in that server or that server does not exist.');
         }
@@ -83,7 +83,7 @@ module.exports = {
         let dbUsers = await User.countDocuments({
             'stats.serversJoined': {
                 $nin: [guildId]
-            }, 
+            },
             'settings.randomRift': 'true'
         });
 
@@ -97,14 +97,14 @@ module.exports = {
                     'settings.serverInterests': `${niche}`,
                     'stats.serversJoined': {
                         $nin: [guildId]
-                    }, 
+                    },
                     'settings.randomRift': 'true'
                 });
                 break;
         }
 
         if (numUsers > dbUsers) {
-            return interaction.editReply(`The database only contains ${dbUsers} opted users that have not joined that server. Along with the niche: \`${niche}\`.`);
+            return interaction.editReply(`The database only contains ${dbUsers} opted users that has not joined that server. Along with the niche: \`${niche}\`.`);
         }
         interaction.editReply(`Adding users to the server ${guildName}...`);
         try {
@@ -112,23 +112,26 @@ module.exports = {
 
             if (niche !== 'all') {
                 query = {
-                    'settings.serverInterests': niche, 
+                    'settings.serverInterests': niche,
                     'settings.randomRift': 'true'
-                }; 
+                };
             } else {
                 query = {
                     'settings.randomRift': 'true'
                 };
             }
             let users = await User.find(query)
-            .sort({
-                'stats.ServersJoinedCount': 1
-            })
-            .limit(numUsers);
-            
+                .sort({
+                    'stats.ServersJoinedCount': 1
+                })
+                .limit(numUsers);
+
             let usersArr = [];
             for (const user of users) {
                 if (interaction.client.guilds.cache.get(guildId).members.cache.has(user.discordId)) {
+                    user.stats.serversJoined.push(guildId);
+                    await user.save();
+                    console.log(`User ${user.discordId} already in server ${guildName}`);
                     continue;
                 }
                 try {
@@ -144,34 +147,53 @@ module.exports = {
                             roles: []
                         })
                     });
-                
-                    if (!res.ok) {
-                        throw new Error('Failed to add user to server:' + res.statusText);
-                    }
-                    if (user.settings.joinNotif === true) {
-                        try {
-                            const member = await guild.members.fetch(user.discordId);
-                            await member.send(`You have been added to the server ${guildName}!`);
-                        } catch (error) {
-                            const errorChannel = await guild.channels.fetch(process.env.errorChannel);
-                            errorChannel.send(`Failed to send message to user ${user.username} (${user.discordId}): User likely has DMs disabled or has blocked the bot. Error: ${error}`);
-                        }
+
+                    console.log(res.statusText + ": " + res.status);
+                    switch (res.status) {
+                        case 201:
+                            if (user.settings.joinNotif === true) {
+                                try {
+                                    const member = await guild.members.fetch(user.discordId);
+                                    await member.send(`You have been added to the server ${guildName}!`);
+                                } catch (error) {
+                                    const errorChannel = await guild.channels.fetch(process.env.errorChannel);
+                                    errorChannel.send(`Failed to send message to user ${user.username} (${user.discordId}): User likely has DMs disabled or has blocked the bot. Error: ${error}`);
+                                }
+                            }
+
+
+                            user.stats.serversJoined.push(guildId);
+                            await user.save();
+
+                            const logChannel = process.env.joinChannel;
+                            const channel = await guild.channels.fetch(logChannel);
+                            await channel.send(`User ${user.username} has been added to the server ${guildName}`);
+
+                            usersArr.push(user.discordId + ': ' + user.username);
+                            break;
+                        case 204:
+                            user.stats.serversJoined.push(guildId);
+                            console.log(`User ${user.discordId} already in server ${guildName}`);
+                            break;
+
+                        case 403:
+                            try {
+                                await User.findOneAndDelete({
+                                    discordId: user.discordId
+                                });
+                            } catch (error) {
+                                console.error(error);
+                            }
+                            console.log(`Deleted user ${user.discordId} from database due to 403 error.`);
+                        default:
+                            break;
                     }
 
-        
-                    user.stats.serversJoined.push(guildId);
-                    await user.save();
-        
-                    const logChannel = process.env.joinChannel;
-                    const channel = await guild.channels.fetch(logChannel);
-                    await channel.send(`User ${user.username} has been added to the server ${guildName}`);
-
-                    usersArr.push(user.discordId + ': ' + user.username);
                 } catch (error) {
                     console.error(error);
                 }
             }
-        
+
             return interaction.editReply(`Added ${usersArr.length} users to the server ${guildName}`);
         } catch (error) {
             console.error(error);

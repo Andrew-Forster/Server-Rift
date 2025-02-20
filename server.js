@@ -1,7 +1,7 @@
 // TODO: Secure API Endpoints with JWT
 // TODO: - Use validation
 // TODO: - Use rate limiting
-// TODO: - Use secure headers
+// TODO: - Use secure headers 
 
 // TODO: Change the way user tokens are generated, currently it is not secure
 
@@ -51,9 +51,10 @@ app.get('/', (request, response) => {
 
 
 const port = process.env.PORT || 3000;
+const domain = process.env.DOMAIN || 'http://localhost:' + port;
 
 app.listen(port, () => {
-    console.log('Server is running at http://localhost:' + port);
+    console.log('Server is running at ' + domain );
 });
 
 
